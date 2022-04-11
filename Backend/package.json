@@ -19,5 +19,8 @@
     "mongoose": "^6.2.10",
     "nodemon": "^2.0.15",
     "stripe": "^8.215.0"
+  },
+  "devDependencies": {
+    "socket.io": "^4.4.1"
   }
 }
