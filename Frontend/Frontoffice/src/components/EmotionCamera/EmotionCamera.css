@@ -1,13 +1,6 @@
 .App {
     background-color: #3d9970;
     min-height: 100vh;
-    margin: 0 auto;
-    max-width: 1580px;
-    font-family: 'Quicksand', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    overflow-x: hidden;
 }
 
 .App header {

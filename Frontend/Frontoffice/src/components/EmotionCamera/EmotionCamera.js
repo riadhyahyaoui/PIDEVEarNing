@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+
 import { loadModels } from '../../helpers/faceApi';
 import { createFaLibrary } from '../../helpers/icons';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Switch from 'react-switch';
-import Camera from '../../components/Camera/Camera';
+import Camera from '../Camera/Camera';
+
 import './EmotionCamera.css';
 createFaLibrary();
 loadModels();
