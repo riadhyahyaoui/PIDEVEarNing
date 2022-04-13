@@ -4,6 +4,8 @@ import styled, {css} from "styled-components";
 import Navbar from "./components/Navbar/Navbar";
 import Intro from "./components/Intro/Intro";
 import Feature from "./components/Feature/Feature";
+import FullVideo from "./components/Videoplayer/FullVideo";
+import Router from './Router/Router'
 
 const Container = styled.div`
   height: 100vh;
@@ -48,15 +50,10 @@ const App = () => {
     const smallScreen = window.screen.width <= 480 ? true : false;
     return (
         <>
-            <Container>
-                <Navbar/>
-                <Intro/>
-                <IntoShape/>
-            </Container>
-            <Container>
-                <Feature/>
-                <FeatureShape/>
-            </Container>
+
+
+            <Router/>
+
         </>
     );
 };

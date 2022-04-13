@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-//import SpeechRecognition from 'react-speech-recognition'
-import PropTypes, {string} from 'prop-types'
+
 import "./styles.css";
 import Line from "./Line";
-import ReactPlayer from "react-player";
+
 import { useTimer } from "use-timer";
 let ii;
 let n=0;

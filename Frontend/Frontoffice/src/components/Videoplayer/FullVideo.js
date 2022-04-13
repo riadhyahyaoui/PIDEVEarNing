@@ -16,14 +16,14 @@ import TextField from "@material-ui/core/TextField"
 import AssignmentIcon from "@material-ui/icons/Assignment"
 import PhoneIcon from "@material-ui/icons/Phone"
 import { CopyToClipboard } from "react-copy-to-clipboard"
-import { stockData } from "../../user/data";
+
 import Audiolect from "./Audiolect";
 import Lyrics from "./Lyrics";
 import UploadLyrics from "./UploadLyrics";
 //import Waveform from "./Waveform";
 
 
-let users=stockData;
+
 let respwidth="100%"
 var peer2= null;
 let bb=null;
@@ -124,16 +124,7 @@ const format = (seconds) => {
 let uss;
 const FullVideo= (props) =>{
 
-const getmyid=()=> {
-    fetch(`http://localhost:8080/ban/6`, {
 
-        "headers": {
-            "Accept": "application/json", "Content-Type": "application/json"
-        },
-        "method": "GET"
-    }).then((response) => response.json().then(data => uss = data.name));
-    console.log(uss);
-}
 
 
     const classes = useStyles();
@@ -573,7 +564,7 @@ const lyricsfunc=lyric ? <Lyrics lyric={lyric} audRef={audRef} /> :null
             <UploadLyrics lyric={(e)=>{setLyric(e)}}  />
 
             <Container  maxWidth={"md"} >
-<button onClick={getmyid}>GETID</button>
+
 
                 <div className="container">
                     <div className="video-container">

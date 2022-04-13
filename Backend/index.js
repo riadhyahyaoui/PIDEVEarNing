@@ -7,6 +7,7 @@ const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
 const stripeRoute = require("./routes/stripe");
+const karaokeRoute = require("./routes/karaoke");
 //const http = require("http")
 const cors = require("cors");
 var server = require('http').Server(app);
@@ -58,6 +59,7 @@ app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", stripeRoute);
+app.use("/api/Karaoke", karaokeRoute);
 
 server.listen(process.env.PORT || 5000, () => {
     console.log("Backend server is running!");

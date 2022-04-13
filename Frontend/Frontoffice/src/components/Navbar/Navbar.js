@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useNavigate ,Router} from 'react-router-dom'
 
 const Container = styled.div`
   height: 50px;
@@ -49,15 +52,19 @@ const Button = styled.button`
 `;
 
 const Navbar = () => {
+    //const navigate = useNavigate();
+    /*const handleButtonClick = () => {
+        history.push('/f')
+    }*/
     return (
         <Container>
             <Wrapper>
                 <Left>
-                    <Logo>Agency</Logo>
+                    <Logo>Ear_ning</Logo>
                     <Menu>
-                        <MenuItem>Home</MenuItem>
-                        <MenuItem>Features</MenuItem>
-                        <MenuItem>Services</MenuItem>
+                        <Link to="/"> <MenuItem>Home</MenuItem></Link>
+                     <Link to="/karaoke"> <MenuItem>Karaoké</MenuItem> </Link>
+                        <Link to="/emotion"><MenuItem>Music Mood</MenuItem></Link>
                         <MenuItem>Pricing</MenuItem>
                         <MenuItem>Contact</MenuItem>
                     </Menu>
