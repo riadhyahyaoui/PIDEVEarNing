@@ -4,7 +4,7 @@ import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 import {
     Button, Icon, Paper, withStyles, Typography
 } from '@material-ui/core';
-import Router from "../../Router/Router";
+
 //import Dropzone from 'react-dropzone';
 //import { uploadRequest, uploadReject } from '../../upload/actions';
 import { useDropzone } from 'react-dropzone';

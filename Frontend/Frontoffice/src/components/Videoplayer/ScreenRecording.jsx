@@ -224,9 +224,9 @@ let camera =this.props.myVideo.current.srcObject;
     render() {
         window.onbeforeunload = this.openModal;
         return (
-            <  div  >
+            <div>
 
-                    <  Container className="pt-3">
+                    <Container className="pt-3">
                         {this.state.stopDisable ? (
                             <Button
 
@@ -248,21 +248,17 @@ let camera =this.props.myVideo.current.srcObject;
 
 
 
-
-
-
-        <ScreenRecordPreviewModal
-            isOpenVideoModal={this.state.isOpenVideoModal}
-            videoModalClose={this.videoModalClose}
-            recordedVideoUrl={this.state.recordedVideoUrl}
-            downloadScreenRecordVideo={this.downloadScreenRecordVideo}
-            recorder={this.state.recordPreview}
-            bko={this.state.recordPreview}
-            />
-
-
                     </Container>
-    </div>
+                <ScreenRecordPreviewModal
+                    isOpenVideoModal={this.state.isOpenVideoModal}
+                    videoModalClose={this.videoModalClose}
+                    recordedVideoUrl={this.state.recordedVideoUrl}
+                    downloadScreenRecordVideo={this.downloadScreenRecordVideo}
+                    recorder={this.state.recordPreview}
+                    bko={this.state.recordPreview}
+                />
+
+            </div>
     )
     }
     }

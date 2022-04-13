@@ -2,7 +2,10 @@
   "name": "Earning",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://unpkg.com/",
   "dependencies": {
+    "@ffmpeg/core": "^0.10.0",
+    "@ffmpeg/ffmpeg": "^0.9.8",
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
@@ -13,7 +16,10 @@
     "react-scripts": "^5.0.0",
     "react-switch": "^5.0.0",
     "react-webcam": "^1.1.1",
-    "styled-components": "^5.3.5"
+    "recordrtc": "^5.6.2",
+    "simple-peer": "^9.11.1",
+    "styled-components": "^5.3.5",
+    "wavesurfer.js": "^6.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,5 +41,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "prop-types": "^15.8.1",
+    "react-copy-to-clipboard": "^5.0.4",
+    "react-dropzone": "^12.0.5",
+    "react-router-dom": "^6.3.0",
+    "reactstrap": "^9.0.1",
+    "screenfull": "^6.0.1",
+    "socket.io-client": "^4.4.1",
+    "use-timer": "^2.0.1"
   }
 }

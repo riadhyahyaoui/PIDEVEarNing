@@ -63,9 +63,9 @@ export default class ScreenRecordPreviewModal extends React.Component {
                     < span className="bold-text">Preview Screen Record< /span >
                 < /ModalHeader >
                 < ModalBody >
-                    < Row className='downloadButtonAlign' >
+                    <Row className='downloadButtonAlign' >
                         < Button color='primary' outline onClick={this.downloadScreenRecordVideo} >Download< /Button >
-                    < / Row >
+                    </Row >
                     < video id="videorecord"
                             controls
                         // controlsList="nodownload"
