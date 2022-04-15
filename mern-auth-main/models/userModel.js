@@ -68,10 +68,10 @@ const userSchema = new Schema(
       type:String
     },
     followers: [
-      { type: Schema.Types.ObjectId, ref: "user" }
+      { type: Schema.Types.ObjectId, ref: "User" }
     ],
     following: [
-      { type: Schema.Types.ObjectId, ref: "user" }],
+      { type: Schema.Types.ObjectId, ref: "User" }],
 
   PasswordResetDate: {
       type:Date
@@ -92,4 +92,4 @@ userSchema.methods.isValidPassword = async function (newPass) {
   }
 }
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("User", userSchema);

@@ -80,18 +80,7 @@ const reclamationAdminCtrl = {
                 });
             });
     },
-    // doneReclamation: async (req, res) => {
 
-    //     //const reclamation = await reclamation.findByIdAndUpdate(req.params.id, { $set: { isDone: true } }, { new: true });
-
-
-    //     const user = await User.findById(req.params.id)
-    //     if (!user) {
-    //         res.status(400).json({ msg: "User does not exist." });
-    //     }
-
-
-    //  }
 
 };
 
