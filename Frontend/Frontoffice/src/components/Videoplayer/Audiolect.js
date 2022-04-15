@@ -132,36 +132,26 @@ const [file2,setFile2]=useState([]);
         //setVideoSrc(URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' })));
     };
     return (
-        <div>
+        <div style={{marginLeft:'78%'}}>
 
 
-            <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                <div>Drag and drop your images here.</div>
+            <div id="upload" >
+                <div id="drop">
+                    <div {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        <div>Drag and drop your Song here.</div>
+                        <a>Browse</a>
+                    </div>
+
+                </div>
+
+                <ul>
+                    {file3 ?
+                       <li><p >{file3.name}</p> <button onClick={doTranscode}>Convert</button> </li>  :null}
+
+                </ul>
+
             </div>
-<button onClick={doTranscode}>convert</button>
-
-            {/*thumbs*/}
-            {/*{fileexist ? <Waveform songup={}/> : null}*/}
-
-
-            {/*<WaveSurfer
-                        audiofile1={file.preview}
-                        //pos={this.state.pos}
-                        //onPosChange={this.handlePosChange}
-                        //playing={isPlaying}
-                        autoplay
-                        options={{
-                            hideScrollbar: true,
-                            normalize: true,
-                            barWidth: 3,
-                            cursorColor: 'gray',
-                            height: 100,
-                            fillParent: true,
-                            progressColor: '#3f51b5',
-                            waveColor: 'gray'
-                        }}
-                    />*/}
 
         </div>
     );
