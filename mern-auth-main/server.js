@@ -5,7 +5,52 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require('body-parser')
 
+const productRoute = require("./routes/product");
+const cartRoute = require("./routes/cart");
+const orderRoute = require("./routes/order");
+const stripeRoute = require("./routes/stripe");
+const karaokeRoute = require("./routes/karaoke");
+
 const app = express();
+var server = require('http').Server(app);
+
+//!socket.io
+const io = require("socket.io")(server, {
+    cors: {
+        origin: "*",
+        methods: [ "GET", "POST" ]
+    }
+})
+let x=true;
+io.on("connection", (socket) => {
+    socket.emit("me", socket.id)
+    /*io.of("/").adapter.on("create-room", (room) => {
+        console.log(`room ${room} was created`);
+    });*/
+    socket.on("disconnect", () => {
+        socket.broadcast.emit("callEnded");
+        x=false;
+    })
+
+    socket.on("callUser", (data) => {
+
+        io.to(data.userToCall).emit("callUser", {signal: data.signalData, from: data.from, name: data.name})
+
+    })
+
+    socket.on("answerCall", (data) => {
+
+        io.to(data.to).emit("callAccepted", data.signal)
+
+        /*io.of("/").adapter.on("join-room", (room, id) => {
+            console.log(`socket ${id} has joined room ${room}`);
+        });*/
+    })
+})
+
+
+
+
 
 //!middlewares
 
@@ -28,11 +73,17 @@ app.use('/api/music', require('./routes/music/musicRouter'));
 app.use('/api/reclamation', require('./routes/reclamation/reclamationRouter'));
 app.use('/api/reclamationAdmin', require('./routes/reclamation/reclamationAdminRouter'));
 
+app.use("/api/products", productRoute);
+app.use("/api/carts", cartRoute);
+app.use("/api/orders", orderRoute);
+app.use("/api/checkout", stripeRoute);
+app.use("/api/Karaoke", karaokeRoute);
+
 var configDB = require('./database/mongodb.json');
 
 //!Database connection to mongoose
 
-//mongo config 
+//mongo config
 const connect = mongoose.connect(
 
   configDB.mongo.uri,
@@ -47,7 +98,7 @@ const connect = mongoose.connect(
 
 //!listening on port
 
-const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log("Listening on ", port);
+//const port = process.env.PORT || 8080;
+server.listen(process.env.PORT || 5000, () => {
+    console.log("Backend server is running!");
 });

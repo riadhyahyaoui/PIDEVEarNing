@@ -82,6 +82,7 @@ const authCtrl = {
       transporter2.sendMail(emailData, function (error, info) {
         if (error) {
           console.log(error);
+          console.log("aaaaaaaaaaa");
         } else {
           console.log('Email sent: ' + info.response);
         }
