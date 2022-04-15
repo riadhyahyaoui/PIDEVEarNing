@@ -118,38 +118,30 @@ const [file2,setFile2]=useState([]);
 
 
     return (
-        <div>
+    <div style={{marginLeft:'78%'}} >
 
-
+      <div id="upload" >
+         <div id="drop">
             <div {...getRootProps()}>
                 <input {...getInputProps()} /*onChange={showFile.bind(this)}*/ /*onChange={(e) => showFile(e)}*//>
-                <div>Drag and drop your images here.</div>
+                <div>Drag and drop your lyrics here.</div>
+                <a>Browse</a>
             </div>
 
 
-            {/*thumbs*/}
-            {/*{fileexist ? <Waveform songup={}/> : null}*/}
+         </div>
+         <ul>
+
+                             {file3 ?
+                                <li id="lyricsLI"><p>{file3.name}</p> </li>  :null}
+
+               </ul>
+
+      </div>
 
 
-            {/*<WaveSurfer
-                        audiofile1={file.preview}
-                        //pos={this.state.pos}
-                        //onPosChange={this.handlePosChange}
-                        //playing={isPlaying}
-                        autoplay
-                        options={{
-                            hideScrollbar: true,
-                            normalize: true,
-                            barWidth: 3,
-                            cursorColor: 'gray',
-                            height: 100,
-                            fillParent: true,
-                            progressColor: '#3f51b5',
-                            waveColor: 'gray'
-                        }}
-                    />*/}
 
-        </div>
+    </div>
     );
 }
 

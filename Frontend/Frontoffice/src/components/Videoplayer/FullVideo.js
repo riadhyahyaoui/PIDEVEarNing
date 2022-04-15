@@ -1,4 +1,5 @@
 import React, {useState, useRef, useEffect, useLayoutEffect,forwardRef} from "react";
+import Karaoke from "../../img/kar.jpg";
 //import Webcam from "react-webcam";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -558,15 +559,17 @@ const lyricsfunc=lyric ? <Lyrics lyric={lyric} audRef={audRef} /> :null
 
 
     return (
-        <>
+        <div style={{ backgroundImage: `url(${Karaoke})`,backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat' }} >
 
             <Audiolect song={(e)=>{setSong2(e)}} />
             <UploadLyrics lyric={(e)=>{setLyric(e)}}  />
 
-            <Container  maxWidth={"md"} >
+            <Container style={{marginTop:'-35%'}} >
 
 
-                <div className="container">
+                <div className="container" style={{marginTop:'5%'}}>
                     <div className="video-container">
                         {/*    <audio autoPlay src='../../../public/KaraokeSong/Fergie.mp3'/>*/}
 
@@ -575,6 +578,7 @@ const lyricsfunc=lyric ? <Lyrics lyric={lyric} audRef={audRef} /> :null
                     onMouseLeave={hanldeMouseLeave}
                     ref={playerContainerRef}
                     className={classes.playerWrapper}
+                    style={{width:'60%',marginTop:'5px'}}
                 >
 
 
@@ -751,7 +755,7 @@ src={'../../public/KaraokeSong/Fergie.mp3'}
                 </div>
 
             </Container>
-        </>
+        </div>
     );
 }
 
