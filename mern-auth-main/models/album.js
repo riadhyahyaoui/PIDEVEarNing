@@ -5,7 +5,7 @@ const albumSchema = mongoose.Schema({
     name:{type:String},
     dateCreation: {type:Date,default:Date.now()}
 });
-const album = mongoose.model("album", albumSchema);
+const album = mongoose.model("Album", albumSchema);
 module.exports = album;
 
 const reclamationSchema = mongoose.Schema({
@@ -16,5 +16,5 @@ const reclamationSchema = mongoose.Schema({
     content: {type:String,required:true},
     dateEnvoi: {type:Date,default:Date.now()}
 });
-const reclamation = mongoose.model("reclamation", reclamationSchema);
+const reclamation = mongoose.model("Reclamation", reclamationSchema);
  module.exports = reclamation;

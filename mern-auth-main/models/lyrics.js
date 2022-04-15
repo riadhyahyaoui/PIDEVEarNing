@@ -1,9 +1,21 @@
-const mongoose =require ("mongoose");
+const mongoose = require("mongoose");
+const lyricsSchema = new mongoose.Schema(
+  {
+    lyrics: { type: String, required: true },
+    music: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Music",
+      required: true,
+    },
+    postedby: { type: mongoose.Schema.Types.ObjectId, required: false, ref: "User" },
+    likes: [
+      {  type: mongoose.Schema.Types.ObjectId,default:0, ref: "User" }
+    ],
+    dislikes: [
+      {  type: mongoose.Schema.Types.ObjectId,default:0, ref: "User" }],
+  },
 
-const lyricsSchema = mongoose.Schema({
-    description: {type:String},
-    name:{type:String},
-    lyrics:{type:String}
-});
-const lyrics = mongoose.model("lyrics", lyricsSchema);
-module.exports = lyrics;
+  { timestamps: true }
+);
+module.exports = mongoose.model("Lyrics", lyricsSchema);
+

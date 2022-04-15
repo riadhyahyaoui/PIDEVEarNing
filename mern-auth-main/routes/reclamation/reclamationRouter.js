@@ -2,6 +2,7 @@
 
 const router = require("express").Router();
 const reclamationCtrl = require("../../controllers/reclamation/reclamationCtrl");
+const { check, notReqAuthentication } = require('../../middleware/auth');
 
 router.post('/add/:idUserSource',reclamationCtrl.addReclamation);
 router.post('/consultReclamation/:id',reclamationCtrl.consultReclamation);

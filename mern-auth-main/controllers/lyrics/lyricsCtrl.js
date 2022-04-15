@@ -1,21 +1,20 @@
 const mongoose = require("mongoose");
 const music = require("../../models/music");
-const Comment = require("../../models/comment");
+const lyrics = require("../../models/lyrics");
 const User = require("../../models/userModel");
 
 //const { check} = require('../../middleware/auth');
 const jwt_decode = require('jwt-decode');
 
 
-const commentCtrl = {
+const lyricsCtrl = {
 
-    addcomment: async (req, res) => {
-      
+    addlyrics: async (req, res) => {
+      console.log("asdsss")
     
    
     try {
 
-        const { commentaire } = req.body;
 
         const token = req.cookies.access_token;
         decodedToken = jwt_decode(token);
@@ -24,24 +23,28 @@ const commentCtrl = {
         
          const MusicId = req.params.id;
          const muzika = await music.findOne({ _id:MusicId});
+         console.log("muzika")
          console.log(muzika)
+         if (!muzika) {
+            return res.status(400).json({ msg: "please check id" });
+          }
 
-        const newComment = new Comment({
-            commentaire,
+        const newlyrics = new lyrics({
+            lyrics:req.body.lyrics,
             postedby:mongoose.Types.ObjectId(decodedToken.sub),
             music:muzika
         });
   
-        await newComment.save();
+        await newlyrics.save();
         
-        music.findByIdAndUpdate(MusicId,{ $push: { comments: newComment }}, { new: true },
+        music.findByIdAndUpdate(MusicId,{ $push: { lyrics: newlyrics }}, { new: true },
             (err, result) => {
                 if (err) {
                     
                     return res.status(422).json({ error: err })
                 }
             })
-            music.findByIdAndUpdate(MusicId,{ $inc: { numComments:1 }}, { new: true },
+            music.findByIdAndUpdate(MusicId,{ $inc: { numlyrics:1 }}, { new: true },
                 (err, result) => {
                     if (err) {
                         
@@ -49,7 +52,7 @@ const commentCtrl = {
                     }
                 })
         res.json({
-            msg: "Comment Successfully!",     
+            msg: "lyrics Successfully!",     
           });
         } catch (err) {
           return res.status(500).json({ msg: err.message });
@@ -57,30 +60,30 @@ const commentCtrl = {
     
 
     },
-    deletecomment: async (req, res) => {
+    deletelyrics: async (req, res) => {
         try {
-            let x = mongoose.Types.ObjectId(req.params.idComment);
-            const com = await Comment.findById(req.params.idComment)
+            let x = mongoose.Types.ObjectId(req.params.idlyrics);
+            const com = await lyrics.findById(req.params.idlyrics)
             if (!com) {
-                res.status(400).json({ msg: "Comment does not exist." });
+                res.status(400).json({ msg: "lyrics does not exist." });
             }
 
             else {
                 com.delete();
-                music.findByIdAndUpdate(req.params.idMusic, { $pull: { comments: x } }, { new: true },
+                music.findByIdAndUpdate(req.params.idMusic, { $pull: { lyrics: x } }, { new: true },
                         (err, result) => {
                             if (err) {
                 
                                 return res.status(422).json({ error: err })
                             }
                         });
-                res.status(200).json("comment has been deleted");
+                res.status(200).json("lyrics has been deleted");
             }
         } catch (err) {
             return res.status(500).json(err);
         }
     },
-    likecomment: async (req, res) => {
+    likelyrics: async (req, res) => {
         const token = req.cookies.access_token;
         decodedToken = jwt_decode(token);
         console.log(decodedToken)
@@ -91,7 +94,7 @@ const commentCtrl = {
         if (!user) {
             res.status(400).json({ msg: "User does not exist." });
         }
-        Comment.findByIdAndUpdate(req.params.commentId, { $push: { likes: x } }, { new: true },
+        lyrics.findByIdAndUpdate(req.params.lyricsId, { $push: { likes: x } }, { new: true },
             (err, result) => {
                 if (err) {
                     return res.status(422).json({ error: err })
@@ -99,7 +102,7 @@ const commentCtrl = {
             })
         return res.status(200).json({ msg: "success!" });
     },
-    dislikecomment: async (req, res) => {
+    dislikelyrics: async (req, res) => {
         const token = req.cookies.access_token;
         decodedToken = jwt_decode(token);
         let x = mongoose.Types.ObjectId(decodedToken.sub);
@@ -107,7 +110,7 @@ const commentCtrl = {
         if (!user) {
             res.status(400).json({ msg: "User does not exist." });
         }
-        Comment.findByIdAndUpdate(req.params.commentId, {$push:{dislikes: x } },{ new: true },
+        lyrics.findByIdAndUpdate(req.params.lyricsId, {$push:{dislikes: x } },{ new: true },
             (err, result) => {
                 if (err) {
                     return res.status(422).json({ error: err })
@@ -117,4 +120,4 @@ const commentCtrl = {
     },
 
 
-}; module.exports = commentCtrl;
+}; module.exports = lyricsCtrl;

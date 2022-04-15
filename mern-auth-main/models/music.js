@@ -7,10 +7,10 @@ const musicSchema = mongoose.Schema({
     dateCreation: {type:Date,default:Date.now()},
     views:{type:Number,default:0},
     likes: [
-      { type: Schema.Types.ObjectId,default:0, ref: "user" }
+      { type: Schema.Types.ObjectId,default:0, ref: "User" }
     ],
     dislikes: [
-      { type: Schema.Types.ObjectId,default:0, ref: "user" }],
+      { type: Schema.Types.ObjectId,default:0, ref: "User" }],
     duration:{type:Number},
     genre: {type:String},
     artistName: {type:String},
@@ -30,8 +30,10 @@ const musicSchema = mongoose.Schema({
   mp3:{
     type: mongoose.Schema.Types.ObjectId
   },
+  postedby: { type: mongoose.Schema.Types.ObjectId, required: false, ref: "User" },
+
     //bucket : {type:GridFSBucket},
-    numComments: { type: String, required: false,default:0},
+  numComments: { type: Number, required: false,default:0},
 
 });
 const musique = mongoose.model("Music", musicSchema);

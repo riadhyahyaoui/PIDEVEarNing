@@ -110,15 +110,13 @@ const authCtrl = {
     }
   },
 
-
-
   login: async (req, res) => {
     try {
 
       const { email, password } = req.body;
 
       const user = await Users.findOne({ email, role: "user" });
-
+      console.log(user)
       if (!user) {
         return res.status(400).json({ msg: "Email or Password is incorrect." });
       }
@@ -131,12 +129,17 @@ const authCtrl = {
         return res.status(400).json({ msg: "Email or Password is incorrect 2." });
       }
 
+    const access_token = signToken(user);
+    // console.log(user)
+    // console.log(token);
+    // res.cookie('access_token', token);
+
       //const access_token = createAccessToken({ id: user._id });
-      access_token = signToken(user);
+    //  access_token = signToken(user);
 
-      const refresh_token = createRefreshToken({ id: user._id });
+   //   const refresh_token = createRefreshToken({ id: user._id });
 
-      // res.cookie('refreshtoken', access_token, { httpOnly: true, maxAge:  30 * 24 * 60 * 60 * 1000 });
+      // res.cookie('access_token', token, { httpOnly: true, maxAge:  30 * 24 * 60 * 60 * 1000 });
       res.cookie("access_token", access_token, {
         httpOnly: true,
         // path: "/api/refresh_token",
@@ -306,7 +309,7 @@ const authCtrl = {
       const token = req.cookies.access_token;
       if (token) {
         decodedToken = jwt_decode(token);
-
+        console.log(decodedToken)
         if (decodedToken) {
           return res.status(200).json({
             msg: "User Checked!",
@@ -339,7 +342,7 @@ const createRefreshToken = (payload) => {
   });
 };
 const signToken = (user) => {
-  return jwt.sign({ iss: 'Earning', sub: user.id, user: user }, 'EarningToken', { expiresIn: "1d" });
+  return jwt.sign({ iss: 'Earning',sub:user._id,user:user}, 'EarningToken', { expiresIn: "1d" });
 }
 
 

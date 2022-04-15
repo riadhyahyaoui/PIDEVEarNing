@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const music = require("../../models/music");
 const User = require("../../models/userModel");
 
+const jwt_decode = require('jwt-decode');
+
 const multer = require('multer');
 const { GridFSBucket } = require('mongodb')
 const { Readable } = require('stream');
@@ -47,7 +49,8 @@ const musicCtrl = {
     fetechMusicByName: async (req, res) => { 
       
         try {
-              music.find({ name:"awel-test"}).find(null, function (err, musika) {
+              music.find({ name:req.params.trackName}).find(null, function (err, musika) {
+                  console.log(musika[0].mp3)
                 var trackID = mongoose.Types.ObjectId(musika[0].mp3);
                 res.set('content-type', 'audio/mp3');
                 res.set('accept-ranges', 'bytes');
@@ -139,13 +142,16 @@ const musicCtrl = {
                 let uploadStream = bucket.openUploadStream(trackName);
                 this.id = uploadStream.id;
                 // console.log(this.id)
+                const token = req.cookies.access_token;
+                decodedToken = jwt_decode(token);
                 const newMusic = new music({
                     name:req.body.name,
                     artistName: req.body.artistName,
                     genre: req.body.genre,
                     duration: req.body.duration,
                     description: req.body.description,
-                    mp3:mongoose.Types.ObjectId(uploadStream.id)
+                    mp3:mongoose.Types.ObjectId(uploadStream.id),
+                    postedby:decodedToken.sub
                 });
                 newMusic.save();
                 res.json({
