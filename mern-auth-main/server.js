@@ -5,10 +5,10 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require('body-parser')
 
-const productRoute = require("./routes/product");
-const cartRoute = require("./routes/cart");
-const orderRoute = require("./routes/order");
-const stripeRoute = require("./routes/stripe");
+const productRoute = require("./routes/Marketplace/product");
+const cartRoute = require("./routes/Marketplace/cart");
+const orderRoute = require("./routes/Marketplace/order");
+const stripeRoute = require("./routes/Marketplace/stripe");
 const karaokeRoute = require("./routes/karaoke");
 
 const app = express();
