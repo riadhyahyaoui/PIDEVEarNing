@@ -72,6 +72,7 @@ app.use('/api/chatBox', require('./routes/chatBox/chatBoxRouter'));
 
 app.use('/api/comment', require('./routes/comment/commentRouter'));
 app.use('/api/lyrics', require('./routes/lyrics/lyricsRouter'));
+app.use('/api/event', require('./routes/event/evenement'));
 
 app.use('/api/reclamation', require('./routes/reclamation/reclamationRouter'));
 app.use('/api/reclamationAdmin', require('./routes/reclamation/reclamationAdminRouter'));

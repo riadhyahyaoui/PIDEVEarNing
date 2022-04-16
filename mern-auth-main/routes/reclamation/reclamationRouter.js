@@ -2,11 +2,11 @@
 
 const router = require("express").Router();
 const reclamationCtrl = require("../../controllers/reclamation/reclamationCtrl");
-const { check, notReqAuthentication } = require('../../middleware/auth');
+const { check,Log, notReqAuthentication } = require('../../middleware/auth');
 
-router.post('/add/:idUserSource',reclamationCtrl.addReclamation);
-router.post('/consultReclamation/:id',reclamationCtrl.consultReclamation);
-router.post('/OnlyDone/:id',reclamationCtrl.OnlyDone);
+router.post('/add',Log,reclamationCtrl.addReclamation);
+router.post('/consultReclamation',Log,reclamationCtrl.consultReclamation);
+router.post('/OnlyDone',Log,reclamationCtrl.OnlyDone);
 
 
 

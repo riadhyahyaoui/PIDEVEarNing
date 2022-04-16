@@ -2,6 +2,7 @@ const reclamation = require("../../models/reclamation");
 const User = require("../../models/userModel");
 const mongoose = require("mongoose");
 const nodemailer = require('nodemailer');
+const jwt_decode = require('jwt-decode');
 
 
 const transporter = nodemailer.createTransport({
@@ -19,7 +20,10 @@ const reclamationCtrl = {
   addReclamation: async (req, res) => {
     try {
 
-      const user = await User.findById(req.params.idUserSource);
+      const token = req.cookies.access_token;
+        decodedToken = jwt_decode(token);
+        console.log(decodedToken.sub) 
+      const user = await User.findById(decodedToken.sub);
       const newreclamation = new reclamation({
         idUserSource: req.params.idUserSource,
         content: req.body.content
@@ -94,7 +98,10 @@ const reclamationCtrl = {
     }
   },
   consultReclamation: async (req, res) => {
-    await reclamation.find({ idUserSource: req.params.id })
+    const token = req.cookies.access_token;
+        decodedToken = jwt_decode(token);
+        console.log(decodedToken.sub) 
+    await reclamation.find({ idUserSource:decodedToken.sub })
       .then(data => {
         res.send({ reclmations: data });
       })
@@ -106,7 +113,11 @@ const reclamationCtrl = {
       });
   },
   OnlyDone: async (req, res) => {
-    await reclamation.find({ idUserSource: req.params.id, isDone: true })
+    const token = req.cookies.access_token;
+        decodedToken = jwt_decode(token);
+        console.log(decodedToken.sub) 
+  // decodedToken.sub : id user connecte
+    await reclamation.find({ idUserSource:decodedToken.sub, isDone: true })
       .then(data => {
         if (!reclamation) {
           res.status(400).json({ msg: "vos reclamtions n'ont pas prise en charge pour le moment ." });
