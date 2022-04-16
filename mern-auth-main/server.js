@@ -76,6 +76,9 @@ app.use('/api/lyrics', require('./routes/lyrics/lyricsRouter'));
 app.use('/api/reclamation', require('./routes/reclamation/reclamationRouter'));
 app.use('/api/reclamationAdmin', require('./routes/reclamation/reclamationAdminRouter'));
 
+
+// Marketplace Routes
+
 app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
@@ -89,7 +92,7 @@ var configDB = require('./database/mongodb.json');
 //mongo config
 const connect = mongoose.connect(
 
-  configDB.mongo.uri,
+    process.env.MONGO_URL,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
