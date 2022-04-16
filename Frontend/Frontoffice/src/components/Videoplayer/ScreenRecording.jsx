@@ -223,6 +223,10 @@ let camera =this.props.myVideo.current.srcObject;
     }
     render() {
         window.onbeforeunload = this.openModal;
+        this.props.isOpenVideoModal(this.state.isOpenVideoModal)
+        this.props.recordedVideoUrl(this.state.recordedVideoUrl)
+        this.props.downloadScreenRecordVideo(this.downloadScreenRecordVideo)
+        this.props.recorder(this.state.recordPreview)
         return (
             <div>
 
@@ -255,7 +259,7 @@ let camera =this.props.myVideo.current.srcObject;
                     recordedVideoUrl={this.state.recordedVideoUrl}
                     downloadScreenRecordVideo={this.downloadScreenRecordVideo}
                     recorder={this.state.recordPreview}
-                    bko={this.state.recordPreview}
+
                 />
 
             </div>

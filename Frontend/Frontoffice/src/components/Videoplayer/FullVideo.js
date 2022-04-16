@@ -21,6 +21,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard"
 import Audiolect from "./Audiolect";
 import Lyrics from "./Lyrics";
 import UploadLyrics from "./UploadLyrics";
+import ScreenRecordPreviewModal from "./ScreenRecordPreviewModal";
 //import Waveform from "./Waveform";
 
 
@@ -555,14 +556,26 @@ d
         </div>
     //);*/
 const lyricsfunc=lyric ? <Lyrics lyric={lyric} audRef={audRef} /> :null
-
+//RecordPreview
+    const[isOpenVideoModal,setIsOpenVideoModal]=useState(false);
+    const[recordedVideoUrl,setRecordedVideoUrl]=useState(null);
+    const[ downloadScreenRecordVideo,setDownloadScreenRecordVideo]=useState(null);
+    const[recorder,setRecorder]=useState(null);
 
 
     return (
         <div style={{ backgroundImage: `url(${Karaoke})`,backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat' }} >
+            <ScreenRecordPreviewModal
+                isOpenVideoModal={isOpenVideoModal}
 
+                recordedVideoUrl={recordedVideoUrl}
+
+                recorder={recorder}
+                style={{marginBottom:'100%'}}
+
+            />
             <Audiolect song={(e)=>{setSong2(e)}} />
             <UploadLyrics lyric={(e)=>{setLyric(e)}}  />
 
@@ -675,6 +688,11 @@ src={'../../public/KaraokeSong/Fergie.mp3'}
                         audOnOff={audioOnOff}
                         videoOnOff={(e)=>{setVideoOnOff(e)}}
                         audioOnOff={(e)=>setAudioOnOff(e)}
+                        isOpenVideoModal2={(e)=>setIsOpenVideoModal(e)}
+
+                        recordedVideoUrl2={(e)=>setRecordedVideoUrl(e)}
+                        downloadScreenRecordVideo={(e)=>setDownloadScreenRecordVideo(e)}
+                        recorder2={(e)=>setRecorder(e)}
 
 
                     />
@@ -754,7 +772,10 @@ src={'../../public/KaraokeSong/Fergie.mp3'}
                     </div>
                 </div>
 
+
+
             </Container>
+
         </div>
     );
 }

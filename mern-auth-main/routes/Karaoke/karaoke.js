@@ -1,4 +1,4 @@
-const Karaoke = require("../models/Karaoke");
+const Karaoke = require("../../models/Karaoke");
 
 
 const router = require("express").Router();
