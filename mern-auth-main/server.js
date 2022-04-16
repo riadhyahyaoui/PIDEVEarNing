@@ -73,6 +73,7 @@ app.use('/api/chatBox', require('./routes/chatBox/chatBoxRouter'));
 app.use('/api/comment', require('./routes/comment/commentRouter'));
 app.use('/api/lyrics', require('./routes/lyrics/lyricsRouter'));
 app.use('/api/event', require('./routes/event/evenement'));
+app.use('/api/playlist', require('./routes/playlist/playlistRouter'));
 
 app.use('/api/reclamation', require('./routes/reclamation/reclamationRouter'));
 app.use('/api/reclamationAdmin', require('./routes/reclamation/reclamationAdminRouter'));
@@ -93,7 +94,9 @@ var configDB = require('./database/mongodb.json');
 //mongo config
 const connect = mongoose.connect(
 
-    process.env.MONGO_URL,
+   // process.env.MONGO_URL,
+   configDB.mongo.uri,
+
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

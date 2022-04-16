@@ -72,7 +72,9 @@ const userSchema = new Schema(
     ],
     following: [
       { type: Schema.Types.ObjectId, ref: "User" }],
-
+      
+      playlist: [
+        { type: Schema.Types.ObjectId, ref: "Playlist" }],
   PasswordResetDate: {
       type:Date
   }

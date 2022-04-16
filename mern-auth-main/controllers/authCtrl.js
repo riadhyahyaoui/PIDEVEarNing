@@ -115,6 +115,7 @@ const authCtrl = {
 
       const { email, password } = req.body;
 
+      console.log(email)
       const user = await Users.findOne({ email, role: "user" });
       console.log(user)
       if (!user) {

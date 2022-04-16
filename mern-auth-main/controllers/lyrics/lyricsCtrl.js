@@ -10,54 +10,53 @@ const jwt_decode = require('jwt-decode');
 const lyricsCtrl = {
 
     addlyrics: async (req, res) => {
-      console.log("asdsss")
-    
-   
-    try {
 
 
-        const token = req.cookies.access_token;
-        decodedToken = jwt_decode(token);
+        try {
 
-        console.log(decodedToken.sub)
-        
-         const MusicId = req.params.id;
-         const muzika = await music.findOne({ _id:MusicId});
-         console.log("muzika")
-         console.log(muzika)
-         if (!muzika) {
-            return res.status(400).json({ msg: "please check id" });
-          }
 
-        const newlyrics = new lyrics({
-            lyrics:req.body.lyrics,
-            postedby:mongoose.Types.ObjectId(decodedToken.sub),
-            music:muzika
-        });
-  
-        await newlyrics.save();
-        
-        music.findByIdAndUpdate(MusicId,{ $push: { lyrics: newlyrics }}, { new: true },
-            (err, result) => {
-                if (err) {
-                    
-                    return res.status(422).json({ error: err })
-                }
-            })
-            music.findByIdAndUpdate(MusicId,{ $inc: { numlyrics:1 }}, { new: true },
+            const token = req.cookies.access_token;
+            decodedToken = jwt_decode(token);
+
+            console.log(decodedToken.sub)
+
+            const MusicId = req.params.id;
+            const muzika = await music.findOne({ _id: MusicId });
+            console.log("muzika")
+            console.log(muzika)
+            if (!muzika) {
+                return res.status(400).json({ msg: "please check id" });
+            }
+
+            const newlyrics = new lyrics({
+                lyrics: req.body.lyrics,
+                postedby: mongoose.Types.ObjectId(decodedToken.sub),
+                music: muzika
+            });
+
+            await newlyrics.save();
+
+            music.findByIdAndUpdate(MusicId, { $push: { lyrics: newlyrics } }, { new: true },
                 (err, result) => {
                     if (err) {
-                        
+
                         return res.status(422).json({ error: err })
                     }
                 })
-        res.json({
-            msg: "lyrics Successfully!",     
-          });
+            music.findByIdAndUpdate(MusicId, { $inc: { numlyrics: 1 } }, { new: true },
+                (err, result) => {
+                    if (err) {
+
+                        return res.status(422).json({ error: err })
+                    }
+                })
+            res.json({
+                msg: "lyrics has been created!",
+            });
         } catch (err) {
-          return res.status(500).json({ msg: err.message });
+            return res.status(500).json({ msg: err.message });
         }
-    
+
 
     },
     deletelyrics: async (req, res) => {
@@ -71,12 +70,12 @@ const lyricsCtrl = {
             else {
                 com.delete();
                 music.findByIdAndUpdate(req.params.idMusic, { $pull: { lyrics: x } }, { new: true },
-                        (err, result) => {
-                            if (err) {
-                
-                                return res.status(422).json({ error: err })
-                            }
-                        });
+                    (err, result) => {
+                        if (err) {
+
+                            return res.status(422).json({ error: err })
+                        }
+                    });
                 res.status(200).json("lyrics has been deleted");
             }
         } catch (err) {
@@ -110,7 +109,7 @@ const lyricsCtrl = {
         if (!user) {
             res.status(400).json({ msg: "User does not exist." });
         }
-        lyrics.findByIdAndUpdate(req.params.lyricsId, {$push:{dislikes: x } },{ new: true },
+        lyrics.findByIdAndUpdate(req.params.lyricsId, { $push: { dislikes: x } }, { new: true },
             (err, result) => {
                 if (err) {
                     return res.status(422).json({ error: err })
