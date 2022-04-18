@@ -56,25 +56,26 @@ export default class ScreenRecordPreviewModal extends React.Component {
     }
     render() {
         return (
-            <  Modal isOpen={this.props.isOpenVideoModal}  >
-                < ModalHeader className="video__modal__header" toggle={this.props.videoModalClose} >
-                    < button className="lnr lnr-cross video__modal__clsBtn formModalCloseButton" type="button"
-                             onClick={this.props.videoModalClose}  />
+            <Modal isOpen={this.props.isOpenVideoModal}  >
+                <ModalHeader className="video__modal__header" toggle={this.props.videoModalClose} >
+                    <Button className="lnr lnr-cross video__modal__clsBtn formModalCloseButton" type="button"
+                             onClick={this.props.videoModalClose}  >Delete</Button>
                     < span className="bold-text">Preview Screen Record< /span >
-                < /ModalHeader >
-                < ModalBody >
+                </ModalHeader>
+                <ModalBody>
                     <Row className='downloadButtonAlign' >
-                        < Button color='primary' outline onClick={this.downloadScreenRecordVideo} >Download< /Button >
-                    </Row >
-                    < video id="videorecord"
+                        <Button color='primary' outline onClick={this.downloadScreenRecordVideo} >Download< /Button >
+                    </Row>
+                    <video id="videorecord"
                             controls
                         // controlsList="nodownload"
                             autoPlay={this.state.isLoaded}
                             playsInline
-                            width={'100%'} height={'100%'}
+
+                            width={'20%'} height={'20%'}
                             src={this.props.recordedVideoUrl} />
-                < /ModalBody >
-            < /Modal >
+                </ModalBody>
+            </Modal>
         )
     }
 }

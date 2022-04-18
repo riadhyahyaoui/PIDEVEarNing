@@ -136,6 +136,9 @@ const Controls = forwardRef(
         audOnOff,
         videoOnOff,
         audioOnOff,
+        isOpenVideoModal2,
+        recordedVideoUrl2,
+        recorder2,
 
     },
     ref
@@ -143,11 +146,23 @@ const Controls = forwardRef(
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
 const[recState,setRecState]=useState(true);
+const[isOpenVideoModal,setIsOpenVideoModal]=useState(false);
+const[recordedVideoUrl,setRecordedVideoUrl]=useState(null);
+const[ downloadScreenRecordVideo,setDownloadScreenRecordVideo]=useState(null);
+const[recorder,setRecorder]=useState(null);
+
 
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
+useEffect(()=>{
+if(isOpenVideoModal===true) {
+    isOpenVideoModal2(isOpenVideoModal)
+    recordedVideoUrl2(recordedVideoUrl)
 
+    recorder2(recorder)
+}
+},[isOpenVideoModal]);
 /*
 const yy=useRef(null);
     useEffect(() => {
@@ -200,6 +215,13 @@ const [play,setPlay]=useState(false);
                   userVideo={userVideo}
                   audRef={audRef}
                   recState={(e)=>setRecState(e)}
+
+                  isOpenVideoModal={(e)=>setIsOpenVideoModal(e)}
+
+                  recordedVideoUrl={(e)=>setRecordedVideoUrl(e)}
+                  downloadScreenRecordVideo={(e)=>setDownloadScreenRecordVideo(e)}
+                  recorder={(e)=>setRecorder(e)}
+
 
                  />
 

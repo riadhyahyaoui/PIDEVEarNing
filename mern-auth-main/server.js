@@ -9,7 +9,7 @@ const productRoute = require("./routes/Marketplace/product");
 const cartRoute = require("./routes/Marketplace/cart");
 const orderRoute = require("./routes/Marketplace/order");
 const stripeRoute = require("./routes/Marketplace/stripe");
-const karaokeRoute = require("./routes/karaoke");
+const karaokeRoute = require("./routes/Karaoke/karaoke");
 
 const app = express();
 var server = require('http').Server(app);
