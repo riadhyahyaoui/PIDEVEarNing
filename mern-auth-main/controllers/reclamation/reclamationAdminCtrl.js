@@ -25,14 +25,10 @@ const reclamationAdminCtrl = {
               );
               reclamation.findOne({ _id:req.params.id }).find(null, function (err, res) {
                 if (err) { throw err; }
-                console.log("res")
-                console.log(res[0].idUserSource)
 
                 User.findById(res[0].idUserSource).find(null, function (err, res2) {
                     if (err) { throw err; }
-                        console.log("res2 : -----------------------------------------")
-                        console.log(res2 )
-
+                      
                       const emailData = {
                         from: "earning.music@gmail.com",
                         subject: 'Complaint ',

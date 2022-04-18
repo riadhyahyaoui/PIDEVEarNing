@@ -57,7 +57,7 @@ const Log = (req, res, next) => {
 
   // IF THERE IS A TOKEN NAME WITH JWT THEN IT IT WON'T LET USER GO SOME ROUTE
   if (token) {
-    console.log(token);    next();
+    next();
 
   } else {
     // IF THERE IS NO TOKEN THEN USER ALLOW TO VISIT CERTAIN ROUTE

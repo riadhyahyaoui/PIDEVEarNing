@@ -82,7 +82,6 @@ const authCtrl = {
       transporter2.sendMail(emailData, function (error, info) {
         if (error) {
           console.log(error);
-          console.log("aaaaaaaaaaa");
         } else {
           console.log('Email sent: ' + info.response);
         }
@@ -115,9 +114,7 @@ const authCtrl = {
 
       const { email, password } = req.body;
 
-      console.log(email)
       const user = await Users.findOne({ email, role: "user" });
-      console.log(user)
       if (!user) {
         return res.status(400).json({ msg: "Email or Password is incorrect." });
       }
@@ -131,17 +128,7 @@ const authCtrl = {
       }
 
     const access_token = signToken(user);
-    // console.log(user)
-    // console.log(token);
-    // res.cookie('access_token', token);
-
-      //const access_token = createAccessToken({ id: user._id });
-    //  access_token = signToken(user);
-
-   //   const refresh_token = createRefreshToken({ id: user._id });
-
-      // res.cookie('access_token', token, { httpOnly: true, maxAge:  30 * 24 * 60 * 60 * 1000 });
-      res.cookie("access_token", access_token, {
+    res.cookie("access_token", access_token, {
         httpOnly: true,
         // path: "/api/refresh_token",
         sameSite: "lax",
@@ -172,9 +159,7 @@ const authCtrl = {
   },
   generateAccessToken: async (req, res) => {
     try {
-      console.log("im here !!! ")
       const rf_token = req.cookies.refreshtoken;
-      console.log(rf_token);
       if (!rf_token) {
         return res.status(400).json({ msg: "Please login again." });
       }
@@ -278,9 +263,6 @@ const authCtrl = {
 
       const Passwordtoken = req.params.Passwordtoken;
       const foundUser = await Users.findOne({ Passwordtoken, "PasswordResetDate": { $gt: Date.now() } });
-      console.log(Passwordtoken)
-      console.log(foundUser)
-
       if (!foundUser) {
         return res.status(403).json({ error: 'Password reset token is invalid or has expired' });
 
@@ -310,7 +292,6 @@ const authCtrl = {
       const token = req.cookies.access_token;
       if (token) {
         decodedToken = jwt_decode(token);
-        console.log(decodedToken)
         if (decodedToken) {
           return res.status(200).json({
             msg: "User Checked!",

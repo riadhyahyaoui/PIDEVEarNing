@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const music = require("../../models/music");
+const User = require("../../models/userModel");
+
 const playlist = require("../../models/playlist");
 const jwt_decode = require('jwt-decode');
 
@@ -20,6 +22,13 @@ const musicAdminCtrl = {
             });
 
             await newPlaylist.save();
+            User.findByIdAndUpdate(decodedToken.sub, { $push: { playlist: newPlaylist } }, { new: true },
+                (err, result) => {
+                    if (err) {
+
+                        return res.status(422).json({ error: err })
+                    }
+                })
 
 
             res.json({
@@ -37,7 +46,6 @@ const musicAdminCtrl = {
     fetechMyPlaylist: async (req, res) => {
         const token = req.cookies.access_token;
         decodedToken = jwt_decode(token);
-        console.log(decodedToken.sub)
         await playlist.find({ idUser: decodedToken.sub })
             .then(data => {
                 res.send({ playlists: data });
@@ -55,14 +63,12 @@ const musicAdminCtrl = {
             const token = req.cookies.access_token;
             decodedToken = jwt_decode(token);
 
-            console.log(decodedToken.sub)
 
             const MusicId = req.params.id;
             const PlaylistId = req.params.PlaylistId;
 
             const muzika = await music.findOne({ _id: MusicId });
-            console.log("muzika")
-            console.log(muzika)
+          
             if (!muzika) {
                 return res.status(400).json({ msg: "please check id" });
             }
@@ -89,7 +95,6 @@ const musicAdminCtrl = {
     AddMusicToMyPlaylistName: async (req, res) => {
         const token = req.cookies.access_token;
         decodedToken = jwt_decode(token);
-        console.log(decodedToken.sub)
         await playlist.find({ idUser: decodedToken.sub })
             .then(data => {
                 res.send({ name: data.name });
@@ -102,7 +107,22 @@ const musicAdminCtrl = {
             });
     },
     fetechPlaylistByName: async (req, res) => { },
+    updateMyPlaylist: async (req, res) => { },
+    deletePlaylist: async (req, res) => {
+        try {
+            const playlistres = await playlist.findById(req.params.id)
+            if (!playlistres) {
+                res.status(400).json({ msg: "playlist does not exist." });
+            }
 
-    deletePlaylist: async (req, res) => { },
+            else {
+                playlistres.delete();
+                res.status(200).json("Playlist has been deleted");
+            }
+            
+        } catch (err) {
+            return res.status(500).json(err);
+        }
+     },
 
 }; module.exports = musicAdminCtrl;

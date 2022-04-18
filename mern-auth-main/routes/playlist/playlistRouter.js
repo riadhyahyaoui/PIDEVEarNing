@@ -6,9 +6,10 @@ const { check, Log ,notReqAuthentication} = require('../../middleware/auth');
 
 router.post('/CreateNewPlaylist',Log,playlistCtrl.CreateNewPlaylist);
 router.put('/AddMusicToMyPlaylist/:id/:PlaylistId',Log,playlistCtrl.AddMusicToMyPlaylist);
-router.delete('/deletePlaylist',Log,playlistCtrl.deletePlaylist);
+router.delete('/deletePlaylist/:id',Log,playlistCtrl.deletePlaylist);
+router.put('/updateMyPlaylist/:id',Log,playlistCtrl.updateMyPlaylist); // manqué
 router.get('/fetechMyPlaylist',Log,playlistCtrl.fetechMyPlaylist);
-router.get('/fetechPlaylistByName',Log,playlistCtrl.fetechPlaylistByName);
+router.get('/fetechPlaylistByName',Log,playlistCtrl.fetechPlaylistByName); // manqué
 
 module.exports = router;
 

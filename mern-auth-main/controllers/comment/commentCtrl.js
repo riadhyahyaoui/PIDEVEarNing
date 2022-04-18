@@ -20,11 +20,9 @@ const commentCtrl = {
         const token = req.cookies.access_token;
         decodedToken = jwt_decode(token);
 
-        console.log(decodedToken.sub)
         
          const MusicId = req.params.id;
          const muzika = await music.findOne({ _id:MusicId});
-         console.log(muzika)
 
         const newComment = new Comment({
             commentaire,
@@ -83,20 +81,23 @@ const commentCtrl = {
     likecomment: async (req, res) => {
         const token = req.cookies.access_token;
         decodedToken = jwt_decode(token);
-        console.log(decodedToken)
         let x = mongoose.Types.ObjectId(decodedToken.sub);
-        console.log(x)
-        console.log(decodedToken.sub)
         const user = await User.findById(decodedToken.sub)
         if (!user) {
             res.status(400).json({ msg: "User does not exist." });
         }
         Comment.findByIdAndUpdate(req.params.commentId, { $push: { likes: x } }, { new: true },
-            (err, result) => {
+            (err) => {
                 if (err) {
                     return res.status(422).json({ error: err })
                 }
             })
+            Comment.findByIdAndUpdate(req.params.commentId, { $pull: { dislikes: x } }, { new: true },
+                (err) => {
+                    if (err) {
+                        return res.status(422).json({ error: err })
+                    }
+                })
         return res.status(200).json({ msg: "success!" });
     },
     dislikecomment: async (req, res) => {
@@ -108,13 +109,20 @@ const commentCtrl = {
             res.status(400).json({ msg: "User does not exist." });
         }
         Comment.findByIdAndUpdate(req.params.commentId, {$push:{dislikes: x } },{ new: true },
-            (err, result) => {
+            (err, ) => {
                 if (err) {
                     return res.status(422).json({ error: err })
                 }
             })
+            Comment.findByIdAndUpdate(req.params.commentId, {$pull:{likes: x } },{ new: true },
+                (err, ) => {
+                    if (err) {
+                        return res.status(422).json({ error: err })
+                    }
+                })
         return res.status(200).json({ msg: "success!" });
     },
+    updatecomment:async (req, res) => {}
 
 
 }; module.exports = commentCtrl;

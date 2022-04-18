@@ -18,12 +18,9 @@ const lyricsCtrl = {
             const token = req.cookies.access_token;
             decodedToken = jwt_decode(token);
 
-            console.log(decodedToken.sub)
 
             const MusicId = req.params.id;
             const muzika = await music.findOne({ _id: MusicId });
-            console.log("muzika")
-            console.log(muzika)
             if (!muzika) {
                 return res.status(400).json({ msg: "please check id" });
             }
@@ -85,10 +82,7 @@ const lyricsCtrl = {
     likelyrics: async (req, res) => {
         const token = req.cookies.access_token;
         decodedToken = jwt_decode(token);
-        console.log(decodedToken)
         let x = mongoose.Types.ObjectId(decodedToken.sub);
-        console.log(x)
-        console.log(decodedToken.sub)
         const user = await User.findById(decodedToken.sub)
         if (!user) {
             res.status(400).json({ msg: "User does not exist." });
@@ -117,6 +111,8 @@ const lyricsCtrl = {
             })
         return res.status(200).json({ msg: "success!" });
     },
+    updateLyrics:async (req, res) => {}
+
 
 
 }; module.exports = lyricsCtrl;

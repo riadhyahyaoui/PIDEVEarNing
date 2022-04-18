@@ -22,7 +22,6 @@ const reclamationCtrl = {
 
       const token = req.cookies.access_token;
         decodedToken = jwt_decode(token);
-        console.log(decodedToken.sub) 
       const user = await User.findById(decodedToken.sub);
       const newreclamation = new reclamation({
         idUserSource: req.params.idUserSource,
@@ -80,7 +79,6 @@ const reclamationCtrl = {
           console.log('Email of admin : ' + res[i].email);
           console.log('------------------------------');
         }
-        console.log(res)
       });
 
 
@@ -100,7 +98,6 @@ const reclamationCtrl = {
   consultReclamation: async (req, res) => {
     const token = req.cookies.access_token;
         decodedToken = jwt_decode(token);
-        console.log(decodedToken.sub) 
     await reclamation.find({ idUserSource:decodedToken.sub })
       .then(data => {
         res.send({ reclmations: data });
@@ -115,8 +112,6 @@ const reclamationCtrl = {
   OnlyDone: async (req, res) => {
     const token = req.cookies.access_token;
         decodedToken = jwt_decode(token);
-        console.log(decodedToken.sub) 
-  // decodedToken.sub : id user connecte
     await reclamation.find({ idUserSource:decodedToken.sub, isDone: true })
       .then(data => {
         if (!reclamation) {
