@@ -6,7 +6,11 @@ import styled, {css} from "styled-components";
 import Feature from "../components/Feature/Feature";
 import EmotionCamera from "../components/EmotionCamera/EmotionCamera";
 import Navbar from "../components/Navbar/Navbar";
-import Marketplace from "../components/MarketPlace/MarketPlace";
+import Home from "../components/MarketPlace/pages/Home"
+import ProductList from "../components/MarketPlace/pages/ProductList";
+import Product from "../components/MarketPlace/pages/Product"
+
+
 
 const Shape = css`
   width: 100%;
@@ -54,7 +58,11 @@ const Router = () => (
             <Route exact path="/" element={<><Intro/><IntoShape/><Feature/><FeatureShape/></>}/>
             <Route exact path="/karaoke" element={<FullVideo id="full"/>}/>
             <Route exact path="/emotion" element={<EmotionCamera/>}/>
-            <Route exact path="/marketplace" element={<Marketplace/>}/>
+            <Route exact path="/marketplace" element={<Home/>}/>
+            <Route exact path="/products" element={<ProductList/>}/>
+            <Route exact path="/products/:category" element={<ProductList/>}/>
+            <Route exact path="/product/:id" element={<Product/>}/>
+
         </Routes>
     </BrowserRouter>
 );
