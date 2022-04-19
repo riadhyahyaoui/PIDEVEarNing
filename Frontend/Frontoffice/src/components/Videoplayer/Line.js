@@ -1,8 +1,49 @@
-import React, { Component } from "react";
+import React, {Component, useState} from "react";
+import './Line.scss';
 
-
-
+var jj=true
+var txt=[];
 export default class KaraokeLyric extends Component {
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.text!==this.props.text){
+            jj=false;
+            txt=this.props.text.split(" ");
+
+            if(txt.length>8){
+
+                for(let i=0;i<txt.length;i++){
+                    console.log(txt[i-1])
+                    if(txt[i].length<=4 && txt[i-1]!==undefined){
+
+                        txt[i]=txt[i-1]+" "+txt[i]
+
+                        txt[i-1]="";
+
+
+
+                    }
+                }
+            }
+            if(txt.length>13){
+
+                for(let i=0;i<txt.length;i++){
+                    console.log(txt[i-1])
+                    if(txt[i].length<=8 && txt[i-1]!==undefined){
+
+                        txt[i]=txt[i-1]+" "+txt[i]
+
+                        txt[i-1]="";
+
+
+
+                    }
+                }
+            }
+
+        }else{jj=true}
+    }
+
     render() {
         const { percentage, text } = this.props;
         let { wrapperStyle, fontStyle, activeStyle } = this.props;
@@ -11,6 +52,8 @@ export default class KaraokeLyric extends Component {
             display: "inline-block",
 
         };
+
+
 
         const defaultFontStyle = {
             position: "absolute",
@@ -62,10 +105,17 @@ export default class KaraokeLyric extends Component {
             };
 
         return (
-            <div style={wrapperStyle} >
+            <div /*style={wrapperStyle}*/ id="boo">
+                {jj ?   <section className="con">
+                    <h1 className="tit">
+                        {txt.map(x=>  <span >{x}</span>) }
 
-                <div style={fontStyle}>{text}</div>
-                <div style={activeStyle}>{text}</div>
+                    </h1>
+
+
+                </section> :null}
+                {/*<div id ="ui" style={fontStyle}>{text}</div>*/}
+                {/*<div style={activeStyle}>{text}</div>*/}
 
             </div>
         );

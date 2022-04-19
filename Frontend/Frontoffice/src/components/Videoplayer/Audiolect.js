@@ -96,7 +96,7 @@ const [file2,setFile2]=useState([]);
 
                 props.song(null);
                 props.song(file.preview);
-
+                props.songName(file.path)
                 //setFile2([]);
 
                 console.log(file);
@@ -130,6 +130,7 @@ const [file2,setFile2]=useState([]);
         const data = ffmpeg.FS('readFile', 'test2.mp3');
         props.song(URL.createObjectURL(new Blob([data.buffer], { type: 'audio/mp3' })));
         //setVideoSrc(URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' })));
+        props.songName(file3.path);
     };
     return (
         <div style={{marginLeft:'78%'}}>

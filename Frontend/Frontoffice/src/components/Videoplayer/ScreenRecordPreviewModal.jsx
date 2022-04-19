@@ -2,6 +2,8 @@ import React from 'react';
 import { Modal, ModalBody, ModalHeader, Button, Row } from 'reactstrap';
 import RecordRTC from 'recordrtc';
 
+import './ScreenRecordPreviewModal.scss';
+
 var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 export default class ScreenRecordPreviewModal extends React.Component {
@@ -54,28 +56,105 @@ export default class ScreenRecordPreviewModal extends React.Component {
             return (Math.random() * new Date().getTime()).toString(36).replace(/\./g, '');
         }
     }
+    dismiss(){
+
+    }
+
+
     render() {
+      /*  $("a b").html(function(index, html) {
+            return html.replace(/\S/g, '<span>$&</span>');
+        });
+
+        $("a").click(function(){
+            $("a").addClass("loading");
+            setTimeout(function(){
+                $("a").removeClass("loading");
+            }, 8000);
+
+        })*/
+        var element = document.getElementById("DownloadButtonT");
+
+
+
+        if(element!==null) {
+            element.addEventListener("click", (event) => {
+                element.classList.add("loading");
+                setTimeout(function () {
+                    element.classList.remove("loading")
+                }, 8000);
+
+            })
+        }
+        var element2 = document.getElementById("DeleteButtonT");
+
+
+
+        if(element2!==null) {
+            element2.addEventListener("click", (event) => {
+                element2.classList.add("loading");
+                setTimeout(function () {
+                    element2.classList.remove("loading");
+
+                }, 8000);
+
+            })
+        }
+
+
         return (
-            <Modal isOpen={this.props.isOpenVideoModal}  >
-                <ModalHeader className="video__modal__header" toggle={this.props.videoModalClose} >
-                    <Button className="lnr lnr-cross video__modal__clsBtn formModalCloseButton" type="button"
-                             onClick={this.props.videoModalClose}  >Delete</Button>
-                    < span className="bold-text">Preview Screen Record< /span >
-                </ModalHeader>
-                <ModalBody>
-                    <Row className='downloadButtonAlign' >
-                        <Button color='primary' outline onClick={this.downloadScreenRecordVideo} >Download< /Button >
-                    </Row>
+            <div hidden={!this.props.isOpenVideoModal} style={{marginTop:'-90%',marginLeft:'-37%'}} >
+                <div className="video__modal__header" hidden={!this.props.videoModalClose} >
+
+                    < span className="bold-text">Preview< /span >
+                </div>
+                <div>
+
                     <video id="videorecord"
                             controls
                         // controlsList="nodownload"
                             autoPlay={this.state.isLoaded}
                             playsInline
 
-                            width={'20%'} height={'20%'}
+                            width={'25%'} height={'20%'}
                             src={this.props.recordedVideoUrl} />
-                </ModalBody>
-            </Modal>
+                </div>
+
+                <Row className='downloadButtonAlign' >
+
+                   <div id="bod" >
+                       <a id="DownloadButtonT" className="btn" onClick={this.downloadScreenRecordVideo} ><b>Download</b><div></div></a>
+                    <a id="DeleteButtonT"  className="btn" type="button"
+                            onClick={this.props.videoModalClose} ><b>Delete</b><div></div></a>
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <defs>
+                            <filter id="goo">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur"/>
+                                <feColorMatrix in="blur" mode="matrix"
+                                               values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"/>
+                                <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+                            </filter>
+                        </defs>
+                    </svg>
+                    <svg className="svg" viewBox="0 0 400 400">
+                        <defs>
+                            <filter id="duotone-filter-post-one">
+                                <feColorMatrix type="matrix"
+                                               values="0.14453125 0 0 0 0.33203125 0.71875 0 0 0 0.27734375 -0.34765625 0 0 0 0.73046875 0 0 0 1 0"></feColorMatrix>
+                            </filter>
+                        </defs>
+                    </svg>
+                   </div>
+
+
+
+
+
+
+                </Row>
+            </div>
         )
     }
 }

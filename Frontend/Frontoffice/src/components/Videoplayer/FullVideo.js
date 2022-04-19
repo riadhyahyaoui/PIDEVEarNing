@@ -158,6 +158,7 @@ const FullVideo= (props) =>{
     const audRef=useRef(null);
     const [song,setSong]=useState(null);
     const [song2,setSong2]=useState(null);
+    const [songName,setSongName]=useState("");
     const [ lyric, setLyric] = useState(null);
     useEffect(()=>{
         if(song2!=null) {
@@ -561,28 +562,27 @@ const lyricsfunc=lyric ? <Lyrics lyric={lyric} audRef={audRef} /> :null
     const[recordedVideoUrl,setRecordedVideoUrl]=useState(null);
     const[ downloadScreenRecordVideo,setDownloadScreenRecordVideo]=useState(null);
     const[recorder,setRecorder]=useState(null);
+    const videoModalClose = () => {
+        setTimeout(function () {
+            setIsOpenVideoModal(false);
+        }, 8000);
 
+
+    }
 
     return (
         <div style={{ backgroundImage: `url(${Karaoke})`,backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat' }} >
-            <ScreenRecordPreviewModal
-                isOpenVideoModal={isOpenVideoModal}
 
-                recordedVideoUrl={recordedVideoUrl}
-
-                recorder={recorder}
-                style={{marginBottom:'100%'}}
-
-            />
-            <Audiolect song={(e)=>{setSong2(e)}} />
+            <Audiolect song={(e)=>{setSong2(e)}}  songName={(e)=>{setSongName(e)}}/>
             <UploadLyrics lyric={(e)=>{setLyric(e)}}  />
 
-            <Container style={{marginTop:'-35%'}} >
+
+            <Container style={{width:'60%',marginTop:'-35%'}} >
 
 
-                <div className="container" style={{marginTop:'5%'}}>
+                <div className="container" >
                     <div className="video-container">
                         {/*    <audio autoPlay src='../../../public/KaraokeSong/Fergie.mp3'/>*/}
 
@@ -591,14 +591,13 @@ const lyricsfunc=lyric ? <Lyrics lyric={lyric} audRef={audRef} /> :null
                     onMouseLeave={hanldeMouseLeave}
                     ref={playerContainerRef}
                     className={classes.playerWrapper}
-                    style={{width:'60%',marginTop:'5px'}}
+
                 >
 
 
                     <video
                         audio={true}
                         ref={playerRef}
-src={'../../public/KaraokeSong/Fergie.mp3'}
                         autoPlay
                         playsInline
                         width={respwidth}
@@ -683,6 +682,7 @@ src={'../../public/KaraokeSong/Fergie.mp3'}
                         myVideo={playerRef}
                         userVideo={userVideo}
                         song={song}
+                        songName={songName}
                         audRef={audRef}
                         vidOnOff={videoOnOff}
                         audOnOff={audioOnOff}
@@ -698,7 +698,8 @@ src={'../../public/KaraokeSong/Fergie.mp3'}
                     />
                 </div>
 
-                <Grid container style={{ marginTop: 20 }} spacing={3}>
+
+                {/*<Grid container style={{ marginTop: 20 }} spacing={3}>
                     {bookmarks.map((bookmark, index) => (
                         <Grid key={index} item>
                             <Paper
@@ -717,13 +718,25 @@ src={'../../public/KaraokeSong/Fergie.mp3'}
                                     bookmark at {bookmark.display}
                                 </Typography>
                             </Paper>
+
                         </Grid>
                     ))}
-                </Grid>
+                </Grid>*/}
                 <canvas ref={canvasRef} />
 
 
 
+                    </div>
+                    <div>inviter ami
+                        {isOpenVideoModal}
+                        { isOpenVideoModal ? <ScreenRecordPreviewModal
+                            isOpenVideoModal={isOpenVideoModal}
+
+                            recordedVideoUrl={recordedVideoUrl}
+                            videoModalClose={videoModalClose}
+                            recorder={recorder}
+
+                        />:null}
                     </div>
                     <div className="myId">
                         <TextField
@@ -775,6 +788,7 @@ src={'../../public/KaraokeSong/Fergie.mp3'}
 
 
             </Container>
+
 
         </div>
     );

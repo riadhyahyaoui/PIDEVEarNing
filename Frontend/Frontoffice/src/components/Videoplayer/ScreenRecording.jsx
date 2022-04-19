@@ -177,7 +177,11 @@ let camera =this.props.myVideo.current.srcObject;
     stop = async () => {
         await this.setState({ startDisable: true })
         recorder.stopRecording(this.stopRecordingCallback);
+
     }
+
+
+
     //destory screen recording
     stopRecordingCallback = async () => {
 
@@ -189,6 +193,7 @@ let camera =this.props.myVideo.current.srcObject;
             })
             recordedVideoUrl = URL.createObjectURL(recorder.getBlob());
         }
+
         this.setState({
             recordedVideoUrl: recordedVideoUrl,
             screen: null,
@@ -202,6 +207,7 @@ let camera =this.props.myVideo.current.srcObject;
         recorder.screen.stop();
         recorder.destroy();
         recorder = null;
+
     }
     // stop audio recording
   /*  stopLocalVideo = async (camera,cam2) => {
@@ -223,10 +229,11 @@ let camera =this.props.myVideo.current.srcObject;
     }
     render() {
         window.onbeforeunload = this.openModal;
-        this.props.isOpenVideoModal(this.state.isOpenVideoModal)
+      this.props.isOpenVideoModal(this.state.isOpenVideoModal)
         this.props.recordedVideoUrl(this.state.recordedVideoUrl)
         this.props.downloadScreenRecordVideo(this.downloadScreenRecordVideo)
         this.props.recorder(this.state.recordPreview)
+
         return (
             <div>
 
@@ -237,7 +244,7 @@ let camera =this.props.myVideo.current.srcObject;
                                 variant="contained"
                                     color="primary"
                                     startIcon={<SaveIcon />}
-                                    onClick={() => this.startScreenRecord()}
+                                    onClick={() => {this.videoModalClose();this.startScreenRecord()}}
 
                             >Start Recording
                             </Button>
@@ -253,14 +260,14 @@ let camera =this.props.myVideo.current.srcObject;
 
 
                     </Container>
-                <ScreenRecordPreviewModal
+                {/*<ScreenRecordPreviewModal
                     isOpenVideoModal={this.state.isOpenVideoModal}
                     videoModalClose={this.videoModalClose}
                     recordedVideoUrl={this.state.recordedVideoUrl}
                     downloadScreenRecordVideo={this.downloadScreenRecordVideo}
                     recorder={this.state.recordPreview}
 
-                />
+                />*/}
 
             </div>
     )

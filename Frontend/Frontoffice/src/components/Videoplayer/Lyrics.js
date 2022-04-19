@@ -277,10 +277,10 @@ setIsStart(!isstart)
             {props.audRef.current && play ?   ((start()) || setPlay(false)):null}
             {note}
             {score}
-            <Line text={line0} percentage={100}  />
+            {/*<Line text={line0} percentage={100}  />*/}
             <Line text={line} percentage={ii} />
 
-            <Line text={line2} percentage={0} />
+            {/*<Line text={line2} percentage={0} />*/}
 
         </div>
     );
