@@ -32,7 +32,7 @@ const userSchema = new Schema(
       required: true,
       minlength: [6, 'Minimum password length is 6 characters'],
     },
-    
+
     role:{
         type: String,
         enum: ['superadmin','admin','user'],
@@ -72,12 +72,16 @@ const userSchema = new Schema(
     ],
     following: [
       { type: Schema.Types.ObjectId, ref: "User" }],
-      
+
       playlist: [
         { type: Schema.Types.ObjectId, ref: "Playlist" }],
   PasswordResetDate: {
       type:Date
-  }
+  },
+    //Teymour
+      karaoke: [
+          { type: Schema.Types.ObjectId, ref: "Karaoke" }
+      ],
 
   },
   {

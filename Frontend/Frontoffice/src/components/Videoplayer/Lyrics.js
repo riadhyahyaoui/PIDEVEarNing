@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import "./styles.css";
 import Line from "./Line";
-
+import './Lyrics.scss';
 import { useTimer } from "use-timer";
 let ii;
 let n=0;
@@ -76,11 +76,11 @@ console.log(props.audRef.current);*/
         if(line!=="") {
 
             if(timers[timers.indexOf(new Date(props.audRef.current.waveform.getCurrentTime() * 1000).toISOString().substr(14, 5))+1]!==undefined) {
-                 tl=0;
+                 /*tl=0;
                  tl = timers[timers.indexOf(new Date(props.audRef.current.waveform.getCurrentTime() * 1000).toISOString().substr(14, 5)) + 1].substr(3, 2) - timers[timers.indexOf(new Date(props.audRef.current.waveform.getCurrentTime() * 1000).toISOString().substr(14, 5))].substr(3, 2)
 
 
-                 tl = 9 / tl ;
+                 tl = 9 / tl ;*/
                  /*console.log(n);*/
 setIsStart(!isstart)
                 //handleListen();
@@ -92,10 +92,10 @@ setIsStart(!isstart)
 
     }, [line]);
 
-    function lyricsTimer() {
+    /*function lyricsTimer() {
         ii=ii+tl;
 
-    }
+    }*/
 
     const removeMS = timing => {
         let clean = timing.substring(3);
@@ -255,7 +255,7 @@ setIsStart(!isstart)
             line7.map(l=>{var savel =l;l=l.replace("(","");l=l.replace(")","");l=l.replace(",","");l=l.toLowerCase();transcript=transcript.toLowerCase();console.log('transcript : '+transcript);console.log('linee : '+l);if(l!==" " && l!==""){ if(transcript.match(l)!==null){ setScore(prevState => prevState+1);console.log(transcript.indexOf(l))/*;transcript=transcript.replace(l,"")*/;if(pp===""){pp=savel;}else{pp=pp+" "+savel}}}});
             //pp=transcript;
             setNote(transcript)
-
+props.score2(score);
             //if(linee){}
 
 
@@ -273,12 +273,18 @@ setIsStart(!isstart)
 
             {/*console.log(txt)*/}
 
-            {ii<=130 ? lyricsTimer() :null}
+
             {props.audRef.current && play ?   ((start()) || setPlay(false)):null}
-            {note}
-            {score}
+
+            <div className="scoretitleT">
+                <h1>score</h1>
+            </div>
+            <div className="scoreT">
+                <h1>{score}</h1>
+            </div>
+
             {/*<Line text={line0} percentage={100}  />*/}
-            <Line text={line} percentage={ii} />
+            <Line text={line} percentage={0} />
 
             {/*<Line text={line2} percentage={0} />*/}
 

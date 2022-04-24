@@ -11,7 +11,8 @@ $tertiary-color: #ffffff;
 
 
   display: flex;
-  margin-top:-60%;
+  position: absolute;
+  margin-top:10%;
   margin-left: 50%;
 
 }
@@ -47,9 +48,9 @@ $tertiary-color: #ffffff;
     animation-delay: 0.3s;
 
   }
-  &:first-letter{
+  /*&:first-letter{
     color: red;
-  }
+  }*/
   &:last-child{
     color: $secondary-color;
     animation-delay: 0.9s;

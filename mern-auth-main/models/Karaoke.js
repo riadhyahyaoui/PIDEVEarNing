@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const KaraokeSchema = new mongoose.Schema(
     {
-        userId: { type: String },
-        videoLink: { type: String },
+        idUser: { type: String},
+        videoLink: { type: String},
         score:{ type: String },
     },
     { timestamps: true }

@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect, useLayoutEffect,forwardRef} from "react";
-import Karaoke from "../../img/kar.jpg";
+import Karaoke from "../../img/sky.jpg";
 //import Webcam from "react-webcam";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -23,6 +23,7 @@ import Lyrics from "./Lyrics";
 import UploadLyrics from "./UploadLyrics";
 import ScreenRecordPreviewModal from "./ScreenRecordPreviewModal";
 //import Waveform from "./Waveform";
+import './FullVideo.scss';
 
 
 
@@ -556,7 +557,9 @@ d
             {song ? <Waveform songup={song}/> : null}
         </div>
     //);*/
-const lyricsfunc=lyric ? <Lyrics lyric={lyric} audRef={audRef} /> :null
+    //score
+    const [score, setScore] = useState(0)
+const lyricsfunc=lyric ? <Lyrics lyric={lyric} audRef={audRef} score2={(e)=>setScore(e)} /> :null
 //RecordPreview
     const[isOpenVideoModal,setIsOpenVideoModal]=useState(false);
     const[recordedVideoUrl,setRecordedVideoUrl]=useState(null);
@@ -570,13 +573,25 @@ const lyricsfunc=lyric ? <Lyrics lyric={lyric} audRef={audRef} /> :null
 
     }
 
+
     return (
-        <div style={{ backgroundImage: `url(${Karaoke})`,backgroundPosition: 'center',
+        <div className="bigcontainerT" style={{ backgroundImage: `url(${Karaoke})`,backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat' }} >
 
+            {[...Array(1000)].map((e, i) =>
+                <div key={i} className="circle-container">
+                    <div className="circle"></div>
+                </div>)
+            }
+
+
+            <h1 id="dareToSingT">Dare to Sing</h1>
+
             <Audiolect song={(e)=>{setSong2(e)}}  songName={(e)=>{setSongName(e)}}/>
+
             <UploadLyrics lyric={(e)=>{setLyric(e)}}  />
+
 
 
             <Container style={{width:'60%',marginTop:'-35%'}} >
@@ -593,11 +608,12 @@ const lyricsfunc=lyric ? <Lyrics lyric={lyric} audRef={audRef} /> :null
                     className={classes.playerWrapper}
 
                 >
-
+                    {lyricsfunc}
 
                     <video
                         audio={true}
                         ref={playerRef}
+                        style={{borderRadius: '10%'}}
                         autoPlay
                         playsInline
                         width={respwidth}
@@ -627,6 +643,7 @@ const lyricsfunc=lyric ? <Lyrics lyric={lyric} audRef={audRef} /> :null
                     {/*<audio autoPlay src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"/>*/}
                     <video
                         hidden={hiddenvid2}
+                        style={{borderRadius: '10%'}}
                         audio={true}
                         ref={userVideo}
                         autoPlay
@@ -655,9 +672,10 @@ const lyricsfunc=lyric ? <Lyrics lyric={lyric} audRef={audRef} /> :null
 
                     </video>
 
-                    {lyricsfunc}
+
 
                     <Controls
+                        style={{borderRadius: '40%'}}
                         ref={controlsRef}
                         onSeek={handleSeekChange}
                         onSeekMouseDown={handleSeekMouseDown}
@@ -729,12 +747,14 @@ const lyricsfunc=lyric ? <Lyrics lyric={lyric} audRef={audRef} /> :null
                     </div>
                     <div>inviter ami
                         {isOpenVideoModal}
-                        { isOpenVideoModal ? <ScreenRecordPreviewModal
+                        { isOpenVideoModal ?
+                            <ScreenRecordPreviewModal
                             isOpenVideoModal={isOpenVideoModal}
 
                             recordedVideoUrl={recordedVideoUrl}
                             videoModalClose={videoModalClose}
                             recorder={recorder}
+                            score={score}
 
                         />:null}
                     </div>
@@ -789,8 +809,8 @@ const lyricsfunc=lyric ? <Lyrics lyric={lyric} audRef={audRef} /> :null
 
             </Container>
 
-
-        </div>
+</div>
+        /*</div>*/
     );
 }
 

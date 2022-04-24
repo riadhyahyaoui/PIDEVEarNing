@@ -1,7 +1,11 @@
 const Karaoke = require("../../models/Karaoke");
-
-
+const { check, Log ,notReqAuthentication} = require('../../middleware/auth');
+const User = require("../../models/userModel");
 const router = require("express").Router();
+const multer = require('multer');
+const express = require("express");
+const jwt_decode = require('jwt-decode');
+const mongoose = require("mongoose");
 
 //CREATE
 //http://localhost:5000/api/karaoke/
@@ -79,6 +83,48 @@ router.get("/", async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
+});
+
+
+
+router.post('/upload/:iduser/:score',async (req, res) => {
+    /*const token = req.cookies.access_token;
+    decodedToken = jwt_decode(token);*/
+    router.use(express.static('public'));
+    const user = await User.findById(req.params.iduser);
+
+    console.log(user);
+
+    console.log(req.params.score);
+
+    const newKaraoke = new Karaoke();
+    //console.log(mongoose.Types.ObjectId(decodedToken.sub))
+    newKaraoke.idUser = req.params.iduser
+    newKaraoke.score = req.params.score;
+
+    const storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, 'public')
+        },
+        filename: (req, file, cb) => {
+            const Dd = Date.now();
+            newKaraoke.videoLink = 'kke';
+            newKaraoke.save();
+            cb(null, Dd + file.originalname)
+
+        }
+    });
+user.karaoke.push(newKaraoke);
+user.save();
+    const upload = multer({storage}).array('file');
+
+    upload(req, res, (err) => {
+        if (err) {
+            return res.status(500).json(err)
+        }
+
+        return res.status(200).send(req.files)
+    })
 });
 
 module.exports = router;

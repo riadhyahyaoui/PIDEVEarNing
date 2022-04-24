@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
+import { Icon } from '@iconify/react';
 //import BookmarkIcon from "@material-ui/icons/Bookmark";
 //import SaveIcon from "@material-ui/icons/Save";
 //import FastRewindIcon from "@material-ui/icons/FastRewind";
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     right: 0,
     bottom: 0,
+
     width: "100%",
     height: "100%",
     background: "rgba(0,0,0,0.6)",
@@ -234,22 +236,36 @@ const [play,setPlay]=useState(false);
 
 
           </Grid>
-            <Grid
-                container direction="row" alignItems="center" justify="flex-end"
+            {vidOnOff ?
+                <Grid  style={{marginTop:'-21%'}}  container direction="row" alignItems="center" justify="flex-end"
             >
-            <Grid>
+                    <Grid >
 
-                {/*<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"  fill="currentColor"
-                     className="bi bi-camera-video-off" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                          d="M10.961 12.365a1.99 1.99 0 0 0 .522-1.103l3.11 1.382A1 1 0 0 0 16 11.731V4.269a1 1 0 0 0-1.406-.913l-3.111 1.382A2 2 0 0 0 9.5 3H4.272l.714 1H9.5a1 1 0 0 1 1 1v6a1 1 0 0 1-.144.518l.605.847zM1.428 4.18A.999.999 0 0 0 1 5v6a1 1 0 0 0 1 1h5.014l.714 1H2a2 2 0 0 1-2-2V5c0-.675.334-1.272.847-1.634l.58.814zM15 11.73l-3.5-1.555v-4.35L15 4.269v7.462zm-4.407 3.56-10-14 .814-.58 10 14-.814.58z"/>
-                </svg>*/}
-                <button onClick={()=>videoOnOff(!vidOnOff)}>Video</button>
-            </Grid>
-                <Grid>
-                    <button onClick={()=>audioOnOff(!audOnOff)}>Audio</button>
+
+                    <button style={{borderRadius: '40%',backgroundColor: 'white',border: 'none'}} > <Icon onClick={()=>videoOnOff(!vidOnOff)} icon="bi:camera-video" style={{color:'black',width:'80%'}} width="25" height="35"/> </button>         {/*<button onClick={()=>videoOnOff(!vidOnOff)}>Video</button>*/}
                 </Grid>
-            </Grid>
+                    <Grid>
+                        {audOnOff ? <button style={{borderRadius: '40%',backgroundColor: 'white',border: 'none'}} > <Icon onClick={()=>audioOnOff(!audOnOff)} icon="ic:sharp-mic-none" style={{color:'black'}} width="25" height="35"/> </button>:<button style={{borderRadius: '40%',backgroundColor: '#FF6347',border: 'none'}} ><Icon onClick={()=>audioOnOff(!audOnOff)} icon="ic:sharp-mic-off" style={{color:'white'}} width="25" height="35"/> </button>}
+                    </Grid>
+                </Grid>
+
+
+
+                    : <Grid style={{marginTop:'-10%'}} container direction="row" alignItems="center" justify="flex-end">
+                    <Grid >
+
+
+                        <button style={{borderRadius: '40%',backgroundColor: '#FF6347',border: 'none'}} ><Icon onClick={()=>videoOnOff(!vidOnOff)} icon="bi:camera-video-off-fill" style={{color:'white',width:'80%'}} width="25" height="35"/> </button>
+                        {/*<button onClick={()=>videoOnOff(!vidOnOff)}>Video</button>*/}
+                    </Grid>
+                    {audOnOff ? <button style={{borderRadius: '40%',backgroundColor: 'white',border: 'none'}} > <Icon onClick={()=>audioOnOff(!audOnOff)} icon="ic:sharp-mic-none" style={{color:'black'}} width="25" height="35"/> </button>:<button style={{borderRadius: '40%',backgroundColor: '#FF6347',border: 'none'}} ><Icon onClick={()=>audioOnOff(!audOnOff)} icon="ic:sharp-mic-off" style={{color:'white'}} width="25" height="35"/> </button>}
+                </Grid>}
+                    {/*<Grid>
+                        <button onClick={()=>audioOnOff(!audOnOff)}>Audio</button>
+                    </Grid>*/}
+
+
+
 
           <Grid container direction="row" alignItems="center" justify="center">
 

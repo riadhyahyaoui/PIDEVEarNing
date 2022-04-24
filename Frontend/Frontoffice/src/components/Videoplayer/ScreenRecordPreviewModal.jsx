@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, ModalBody, ModalHeader, Button, Row } from 'reactstrap';
 import RecordRTC from 'recordrtc';
+import axios from 'axios';
 
 import './ScreenRecordPreviewModal.scss';
 
@@ -33,6 +34,7 @@ export default class ScreenRecordPreviewModal extends React.Component {
                 type: 'video/mp4'
             });
             RecordRTC.invokeSaveAsDialog(file);
+
         }
     };
     // Get file name
@@ -41,7 +43,7 @@ export default class ScreenRecordPreviewModal extends React.Component {
         var year = d.getFullYear();
         var month = d.getMonth();
         var date = d.getDate();
-        return 'ScreenRecord-' + year + month + date + '-' + this.getRandomString() + '.' + fileExtension;
+        return 'karaoke' + year + month + date + '.' + fileExtension;
     }
     // Get random string for file name
     getRandomString = () => {
@@ -62,17 +64,7 @@ export default class ScreenRecordPreviewModal extends React.Component {
 
 
     render() {
-      /*  $("a b").html(function(index, html) {
-            return html.replace(/\S/g, '<span>$&</span>');
-        });
 
-        $("a").click(function(){
-            $("a").addClass("loading");
-            setTimeout(function(){
-                $("a").removeClass("loading");
-            }, 8000);
-
-        })*/
         var element = document.getElementById("DownloadButtonT");
 
 
@@ -100,10 +92,80 @@ export default class ScreenRecordPreviewModal extends React.Component {
 
             })
         }
+        var element3 = document.getElementById("SaveButtonT");
 
+
+
+        if(element3!==null) {
+            element3.addEventListener("click", (event) => {
+                element3.classList.add("loading");
+                setTimeout(function () {
+                    element3.classList.remove("loading");
+
+                }, 8000);
+
+            })
+        }
+        const onSub = (e) => {
+
+
+
+
+
+
+           /* axios.get(`//localhost:5000/api/auth/check`)
+                .then((response) => {
+                    console.log(response.data);
+                    console.log("response");
+                })
+                .catch((e) => {
+                    console.log(e);
+                    console.log("response");
+                });
+*/
+        }
+        const onSubmit = async () => {
+            let userId;
+            await axios.post(`//localhost:5000/api/auth/login`, {
+                "email": "teymourdridiwars@gmail.com",
+                "password": "21071995TeY"
+            })
+                .then((response) => {
+                    userId = response.data.user._id;
+                    console.log(userId);
+
+                })
+                .catch((e) => {
+                    console.log(e);
+
+                });
+            console.log(userId);
+
+            let recorderBlob = this.props.recorder;
+            var blob = recorderBlob;
+
+
+            const data = new FormData();
+
+            var file = new File([blob], this.getfileName('mp4'), {
+                type: 'video/mp4'
+            });
+            data.append('file', file);
+
+            const urlUpload = '//localhost:5000/api/Karaoke/upload/' + userId +'/'+this.props.score
+
+
+            axios.post(urlUpload, data)
+                .then((response) => {
+
+                })
+                .catch((e) => {
+
+                })
+        };
 
         return (
-            <div hidden={!this.props.isOpenVideoModal} style={{marginTop:'-90%',marginLeft:'-37%'}} >
+            <div hidden={!this.props.isOpenVideoModal} style={{marginTop:'-70%',marginLeft:'-37%'}} >
                 <div className="video__modal__header" hidden={!this.props.videoModalClose} >
 
                     < span className="bold-text">Preview< /span >
@@ -127,6 +189,29 @@ export default class ScreenRecordPreviewModal extends React.Component {
                     <a id="DeleteButtonT"  className="btn" type="button"
                             onClick={this.props.videoModalClose} ><b>Delete</b><div></div></a>
 
+                           <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <defs>
+                            <filter id="goo">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur"/>
+                                <feColorMatrix in="blur" mode="matrix"
+                                               values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"/>
+                                <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+                            </filter>
+                        </defs>
+                    </svg>
+                    <svg className="svg" viewBox="0 0 400 400">
+                        <defs>
+                            <filter id="duotone-filter-post-one">
+                                <feColorMatrix type="matrix"
+                                               values="0.14453125 0 0 0 0.33203125 0.71875 0 0 0 0.27734375 -0.34765625 0 0 0 0.73046875 0 0 0 1 0"></feColorMatrix>
+                            </filter>
+                        </defs>
+                    </svg>
+                   </div>
+
+                    <div id="bod" >
+
+                       <a style={{marginLeft:'10%'}} id="SaveButtonT" className="btn" type="button" onClick={(e)=> onSubmit(e)}><b>Save</b><div></div></a>
 
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
                         <defs>
