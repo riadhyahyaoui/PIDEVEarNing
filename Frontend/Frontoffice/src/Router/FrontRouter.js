@@ -11,7 +11,6 @@ import ProductList from "../components/MarketPlace/pages/ProductList";
 import Product from "../components/MarketPlace/pages/Product"
 import Course from "../components/Course/Course";
 import App from "../Backoffice/src/App";
-import FrontRouter from "./FrontRouter";
 
 
 
@@ -53,26 +52,23 @@ const PriceShape = styled.div`
 `;
 
 
-const Router = () => (
-    <BrowserRouter>
-
+const FrontRouter = () => (
+    <div>
+        <Navbar/>
 
         <Routes>
 
-            {/*<Route exact path="/" element={<><Intro/><IntoShape/><Feature/><FeatureShape/></>}/>
+            <Route exact path="/" element={<><Intro/><IntoShape/><Feature/><FeatureShape/></>}/>
             <Route exact path="/karaoke" element={<FullVideo id="full"/>}/>
             <Route exact path="/emotion" element={<EmotionCamera/>}/>
             <Route exact path="/marketplace" element={<Home/>}/>
             <Route exact path="/products" element={<ProductList/>}/>
             <Route exact path="/products/:category" element={<ProductList/>}/>
             <Route exact path="/product/:id" element={<Product/>}/>
-            <Route exact path="/Course" element={<Course/>}/>*/}
-
-            <Route exact path="/*" element={<FrontRouter/>}/>
-            <Route  path="/back/*" element={<App/>}/>
+            <Route exact path="/Course" element={<Course/>}/>
 
 
         </Routes>
-    </BrowserRouter>
+    </div>
 );
-export default Router;
+export default FrontRouter;

@@ -10,6 +10,7 @@ const cartRoute = require("./routes/Marketplace/cart");
 const orderRoute = require("./routes/Marketplace/order");
 const stripeRoute = require("./routes/Marketplace/stripe");
 const karaokeRoute = require("./routes/Karaoke/karaoke");
+const courseRoute = require("./routes/Course/course");
 
 const app = express();
 var server = require('http').Server(app);
@@ -85,7 +86,10 @@ app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", stripeRoute);
+
+//   karaoké+Course
 app.use("/api/Karaoke", karaokeRoute);
+app.use("/api/course", courseRoute);
 
 var configDB = require('./database/mongodb.json');
 
