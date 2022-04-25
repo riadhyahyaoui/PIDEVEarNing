@@ -11,6 +11,7 @@ import ProductList from "../components/MarketPlace/pages/ProductList";
 import Product from "../components/MarketPlace/pages/Product"
 import Course from "../components/Course/Course";
 import App from "../Backoffice/src/App";
+import Cart from "../components/MarketPlace/pages/Cart";
 
 
 
@@ -66,6 +67,8 @@ const FrontRouter = () => (
             <Route exact path="/products/:category" element={<ProductList/>}/>
             <Route exact path="/product/:id" element={<Product/>}/>
             <Route exact path="/Course" element={<Course/>}/>
+            <Route exact path="/cart" element={<Cart/>}/>
+
 
 
         </Routes>
