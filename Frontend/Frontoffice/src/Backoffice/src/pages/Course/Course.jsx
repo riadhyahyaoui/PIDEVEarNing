@@ -28,8 +28,6 @@ export default function Course() {
                 setCourse(response.data)
 
 
-
-
             })
             .catch((e) => {
                 console.log(e);
@@ -61,19 +59,23 @@ export default function Course() {
               <div className="productInfoBottom">
                   <div className="productInfoItem">
                       <span className="productInfoKey">id:</span>
-                      <span className="productInfoValue">123</span>
+                      <span className="productInfoValue">{course ? course._id:null}</span>
                   </div>
                   <div className="productInfoItem">
-                      <span className="productInfoKey">sales:</span>
-                      <span className="productInfoValue">5123</span>
+                      <span className="productInfoKey">description:</span>
+                      <span className="productInfoValue">{course ? course.description:null}</span>
                   </div>
                   <div className="productInfoItem">
-                      <span className="productInfoKey">active:</span>
-                      <span className="productInfoValue">yes</span>
+                      <span className="productInfoKey">Beginner Lessons :</span>
+                      <span className="productInfoValue">{course ? course.beginner.length:null}</span>
                   </div>
                   <div className="productInfoItem">
-                      <span className="productInfoKey">in stock:</span>
-                      <span className="productInfoValue">no</span>
+                      <span className="productInfoKey">Medium Lessons :</span>
+                      <span className="productInfoValue">{course ? course.medium.length:null}</span>
+                  </div>
+                   <div className="productInfoItem">
+                      <span className="productInfoKey">Advanced Lessons :</span>
+                      <span className="productInfoValue">{course ? course.advanced.length:null}</span>
                   </div>
               </div>
           </div>
@@ -87,6 +89,7 @@ export default function Course() {
     upid={course ? course._id:null}
     upname={course ? course.name:null}
     upimgLink={course ? course.imgLink:null}
+    updescription={course ? course.description:null}
     upbeginner={course ? course.beginner:null}
     upmedium={course ? course.medium:null}
     upadvanced={course ? course.advanced:null}

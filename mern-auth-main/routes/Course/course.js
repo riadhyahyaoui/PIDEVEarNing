@@ -16,6 +16,7 @@ if(req.body._id){
 }
     newCourse.imgLink=req.body.imgLink
     newCourse.name=req.body.name
+    newCourse.description=req.body.description
 
     if(req.body.beginner) {
         req.body.beginner.map(async t => {

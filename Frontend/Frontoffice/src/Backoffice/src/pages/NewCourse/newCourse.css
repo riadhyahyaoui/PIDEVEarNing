@@ -12,18 +12,39 @@
   flex-direction: column;
   margin-bottom: 10px;
 }
+.addCourseDesc{
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
 
 .addProductItem > label {
+  color: black;
+  font-weight: 680;
+  margin-bottom: 10px;
+}
+.addCourseDesc > label {
   color: gray;
+
   font-weight: 600;
   margin-bottom: 10px;
 }
 
 .addProductItem > input {
   padding: 10px;
+  font-weight: bold;
+}
+.addCourseDesc > input {
+  padding: 10px;
+  height: 100px;
+  font-weight: bold;
 }
 
 .addProductItem > select {
+  padding: 10px;
+}
+.addCourseDesc > select {
   padding: 10px;
 }
 

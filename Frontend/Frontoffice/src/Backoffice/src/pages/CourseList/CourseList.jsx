@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import "./CourseList.css";
-import { DataGrid } from "@material-ui/data-grid";
+import {DataGrid, GridToolbar} from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
@@ -8,11 +8,16 @@ import { useState } from "react";
 import axios from "axios";
 export default function CourseList() {
   const [data, setData] = useState(productRows);
+
+
   useEffect(()=>{
       axios.get(`//localhost:5000/api/course/`)
           .then((response) => {
               for(let i=0 ;i<response.data.length;i++) {
                   response.data[i].id = response.data[i]._id
+                  response.data[i].beginner=response.data[i].beginner.length;
+                  response.data[i].medium=response.data[i].medium.length;
+                  response.data[i].advanced=response.data[i].advanced.length;
               }
               setData(response.data)
               console.log("response");
@@ -49,20 +54,13 @@ export default function CourseList() {
 
 
 
-
-
-
-
-  const handleFilter = (id) => {
-    setData(data.filter((item) => item.name !== id));
-  };
-
   const columns = [
 
     {
-      field: "image",
+      field: "imgLink",
       headerName: "Image",
-      width: 200,
+      width: 100,
+        sortable: false,
       renderCell: (params) => {
         return (
           <div className="productListItem">
@@ -73,30 +71,47 @@ export default function CourseList() {
       },
     },
       {
-      field: "course",
+      field: "name",
       headerName: "Course",
+          sortable: true,
       width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="productListItem">
 
-            {params.row.name}
-          </div>
-        );
-      },
+
+    },
+{
+      field: "description",
+      headerName: "Description",
+          sortable: true,
+      width: 200,
+
+
+    },
+{
+      field: "beginner",
+      headerName: "Beginner Lessons",
+          sortable: true,
+      width: 181,
+
+
+
+
+    },
+{
+      field: "medium",
+      headerName: "Medium Lessons",
+          sortable: true,
+      width: 179,
+
+    },
+{
+      field: "advanced",
+      headerName: "Advanced Lessons",
+          sortable: true,
+      width: 180,
+
     },
 
-    /*{ field: "stock", headerName: "Stock", width: 200 },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 120,
-    },
-    {
-      field: "price",
-      headerName: "Price",
-      width: 160,
-    },*/
+
     {
       field: "action",
       headerName: "Action",
@@ -122,13 +137,16 @@ export default function CourseList() {
       <Link to="../../back/newcourse">
         <button className="productAddButton">Create</button>
       </Link>
+
       <DataGrid
         rows={data}
         disableSelectionOnClick
-        filterMode
+
+        components={{Toolbar: GridToolbar}}
         columns={columns}
         pageSize={8}
         checkboxSelection
+
       />
     </div>
   );

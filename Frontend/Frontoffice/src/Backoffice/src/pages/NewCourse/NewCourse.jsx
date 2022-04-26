@@ -3,15 +3,15 @@ import "./newCourse.css";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import {func} from "prop-types";
-let bname=[]
-let mname=[]
-let aname=[]
-let bvidLink=[]
-let mvidLink=[]
-let avidLink=[]
-let beginer=[]
-let medium=[]
-let advanced=[]
+//let bname=[]
+//let mname=[]
+//let aname=[]
+//let bvidLink=[]
+//let mvidLink=[]
+//let avidLink=[]
+//let beginer=[]
+//let medium=[]
+//let advanced=[]
 let val=false
 let update=true
  const NewCourse=(props)=> {
@@ -20,6 +20,16 @@ let update=true
   const [nAdvanced,setNAdvanced]=useState(1)
   const [name,setName]=useState("")
   const [imgLink,setimgLink]=useState("")
+  const [description,setDescription]=useState("")
+  let [advanced,setAdvanced]=useState([])
+  let [medium,setMedium]=useState([])
+  let [beginer,setBeginer]=useState([])
+  let [bname,setBname]=useState([])
+  let [bvidLink,setBvidLink]=useState([])
+  let [mname,setMname]=useState([])
+  let [mvidLink,setMvidLink]=useState([])
+  let [aname,setAname]=useState([])
+  let [avidLink,setAvidLink]=useState([])
      const[valid,setValid]=useState(false)
 
 let x=0;
@@ -43,6 +53,7 @@ let x=0;
           axios.post('http://localhost:5000/api/course/', {
               name: name,
               imgLink: imgLink,
+              description:description,
               beginner: beginer,
               medium: medium,
               advanced: advanced
@@ -75,6 +86,7 @@ let x=0;
               _id: props.upid,
               name: name,
               imgLink: imgLink,
+              description:description,
               beginner: beginer,
               medium: medium,
               advanced: advanced
@@ -175,8 +187,10 @@ function validationname(st){
      useEffect(()=>{
 
             if(props.upbeginner){
-                props.upbeginner.map(t=>{
+                let b=0;
 
+                props.upbeginner.map(t=>{
+b=b+1
                     axios.get(`//localhost:5000/api/course/find/beg/` + t)
                         .then((response) => {
 
@@ -193,13 +207,17 @@ function validationname(st){
 
 
                 })
+                if (b>1){setN(b)}
             }
 
          if(props.upmedium){
-             props.upmedium.map(t=>{
+             let m=0;
 
+             props.upmedium.map(t=>{
+                 m=m+1;
                  axios.get(`//localhost:5000/api/course/find/med/` + t)
                      .then((response) => {
+
 
                          mname.push(response.data.name);
                          mvidLink.push(response.data.videoLink)
@@ -214,11 +232,15 @@ function validationname(st){
 
 
              })
+
+             if (m>1){setNMedium(m)}
          }
 
          if(props.upadvanced){
-             props.upadvanced.map(t=>{
+             let a=0;
 
+             props.upadvanced.map(t=>{
+                 a=a+1
                  axios.get(`//localhost:5000/api/course/find/adv/` + t)
                      .then((response) => {
 
@@ -235,6 +257,7 @@ function validationname(st){
 
 
              })
+             if (a>1){setNAdvanced(a)}
          }
 
             setTimeout(()=> {
@@ -244,7 +267,11 @@ function validationname(st){
                 if (props.upimgLink) {
                     setimgLink(props.upimgLink)
                 }
+                if (props.updescription) {
+                    setDescription(props.updescription)
+                }
             },1000)
+         setValid(!valid)
 
      },[props.upbeginner])
 
@@ -269,6 +296,13 @@ function validationname(st){
                          <input type="text" defaultValue={props.upimgLink} onChange={(e) => setimgLink(e.target.value)} placeholder="link"/>
                          {imgLink.replaceAll(" ","").length<1 ?   validation(false) :validation(true)}
                          { imgLink.replaceAll(" ","").length>=1 && ( imgLink.replaceAll(" ","").length<15 || !imgLink.match("http")) ? validationlink(false) :validationlink(true)}
+
+                     </div>
+                    <div className="addCourseDesc">
+                         <label>Description</label>
+                         <input type="textarea" defaultValue={props.updescription} onChange={(e) => setDescription(e.target.value)} placeholder="description"/>
+                         {description.replaceAll(" ","").length<1 ?   validation(false) :validation(true)}
+                        {description.replaceAll(" ","").length<4 && description.replaceAll(" ","").length>=1? validationname(false) :validationname(true)}
 
                      </div>
                      <div className="addProductItem">
