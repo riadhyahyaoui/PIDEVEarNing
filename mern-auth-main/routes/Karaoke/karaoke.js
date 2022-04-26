@@ -108,7 +108,7 @@ router.post('/upload/:iduser/:score',async (req, res) => {
         },
         filename: (req, file, cb) => {
             const Dd = Date.now();
-            newKaraoke.videoLink = 'kke';
+            newKaraoke.videoLink = Dd + file.originalname;
             newKaraoke.save();
             cb(null, Dd + file.originalname)
 

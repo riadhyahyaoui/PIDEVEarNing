@@ -2,20 +2,63 @@ const router = require("express").Router();
 const express = require("express");
 const mongoose = require("mongoose");
 const Course = require("../../models/Course");
+const Beginner = require("../../models/Beginner");
+const Medium = require("../../models/Medium");
+const Advanced = require("../../models/Advanced");
 
 
 //CREATE
 //http://localhost:5000/api/course/
 router.post("/", async (req, res) => {
-    const newCourse = new Course(req.body);
+    const newCourse = new Course();
+if(req.body._id){
+    newCourse._id=req.body._id
+}
+    newCourse.imgLink=req.body.imgLink
+    newCourse.name=req.body.name
 
+    if(req.body.beginner) {
+        req.body.beginner.map(async t => {
+            newCourse.beginner.push(await new Beginner(t).save())
+        });
+    }
+    if(req.body.medium) {
+
+        req.body.medium.map(async t => {
+
+            newCourse.medium.push(await new Medium(t).save())
+        });
+    }
+    if(req.body.advanced) {
+
+        req.body.advanced.map(   async t => {
+
+            newCourse.advanced.push(await new Advanced(t).save());
+        });
+    }
+
+
+setTimeout(async function () {
     try {
-        const savedCourse = await newCourse.save();
-        res.status(200).json(savedCourse);
+        if(req.body._id) {
+            const savedCourse = await Course.findByIdAndUpdate(
+                req.body._id,
+                {
+                    $set: newCourse,
+                },
+                { new: true }
+            );
+            res.status(200).json(savedCourse);
+        }else{const savedCourse = await newCourse.save();
+            res.status(200).json(savedCourse);}
+
     } catch (err) {
         res.status(500).json(err);
+        console.log(err);
     }
+},1000);
 });
+
 
 //UPDATE
 //http://localhost:5000/api/course/:id
@@ -39,7 +82,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     try {
         await Course.findByIdAndDelete(req.params.id);
-        res.status(200).json("Product has been deleted...");
+        res.status(200).json("Course has been deleted !");
     } catch (err) {
         res.status(500).json(err);
     }
@@ -77,6 +120,32 @@ router.get("/", async (req, res) => {
         }
 
         res.status(200).json(courses);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+router.get("/find/beg/:id", async (req, res) => {
+    try {
+        const beginner = await Beginner.findById(req.params.id);
+        res.status(200).json(beginner);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+router.get("/find/med/:id", async (req, res) => {
+    try {
+        const medium = await Medium.findById(req.params.id);
+        res.status(200).json(medium);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+router.get("/find/adv/:id", async (req, res) => {
+    try {
+        const advanced = await Advanced.findById(req.params.id);
+        res.status(200).json(advanced);
     } catch (err) {
         res.status(500).json(err);
     }
