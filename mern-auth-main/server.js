@@ -79,7 +79,7 @@ app.use('/api/playlist', require('./routes/playlist/playlistRouter'));
 app.use('/api/reclamation', require('./routes/reclamation/reclamationRouter'));
 app.use('/api/reclamationAdmin', require('./routes/reclamation/reclamationAdminRouter'));
 
-
+app.use('/api/event', require('./routes/event/evenement'));
 // Marketplace Routes
 
 app.use("/api/products", productRoute);

@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
-
-
+const mongoose = require("mongoose");
 
 const evenementSchema = new mongoose.Schema(
   {
@@ -30,21 +28,23 @@ const evenementSchema = new mongoose.Schema(
     },
     picture: {
       type: String,
-      default: "./users/Mega-PC/Desktop/user.jpg"
-    },    
-    likes: [
-      {  type: mongoose.Schema.Types.ObjectId,default:0, ref: "User" }
+      default: "./users/Mega-PC/Desktop/user.jpg",
+    },
+    reservation: [
+      {
+        user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        nbre: { type: Number },
+      },
     ],
+    likes: [{ type: mongoose.Schema.Types.ObjectId, default: 0, ref: "User" }],
     dislikes: [
-      {  type: mongoose.Schema.Types.ObjectId,default:0, ref: "User" }],
+      { type: mongoose.Schema.Types.ObjectId, default: 0, ref: "User" },
+    ],
   },
   {
     timestamps: true,
   }
 );
-
-
-
 
 const evenementModel = mongoose.model("evenement", evenementSchema);
 
