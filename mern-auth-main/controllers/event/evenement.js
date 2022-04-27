@@ -43,7 +43,20 @@ module.exports.signUp = async (req, res) => {
 module.exports.getAllevenements = async (req, res) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   const evenements = await evenementModel.find().lean();
-  res.status(200).json(evenements);
+  const user = await userModel.find({ _id: "62670ee66b1145218040f5ea" }).lean();
+  let checkIfLiked = (element) => element == "62670ee66b1145218040f5ea";
+  let eventList = [];
+  evenements.map((ev) => {
+    let obj = ev;
+    if (ev.likes.some(checkIfLiked)) {
+      obj.likedEvent = true;
+      eventList.push(obj);
+      return ev;
+    }
+    eventList.push(obj);
+    return ev;
+  });
+  res.status(200).json(eventList);
 };
 
 module.exports.evenementInfo = (req, res) => {
@@ -103,49 +116,63 @@ module.exports.deleteevenement = async (req, res) => {
 };
 
 module.exports.likeevenementModel = async (req, res) => {
-  const token = req.cookies.access_token;
-  let decodedToken;
-  if (token) {
-    decodedToken = jwt_decode(token);
-    if (decodedToken && decodedToken.sub) {
-      await evenementModel
-        .findByIdAndUpdate(req.params.evenementModelId, {
-          $addToSet: { likes: decodedToken.sub },
-        })
-        .lean();
-      res.status(200).json({
-        message: "event added to wishlist!",
-      });
+  // const token = req.cookies.access_token;
+  // let decodedToken;
+  // if (token) {
+  //   decodedToken = jwt_decode(token);
+  //   if (decodedToken && decodedToken.sub) {
+   await evenementModel
+    .findByIdAndUpdate(req.params.evenementModelId, {
+      $addToSet: { likes: "62670ee66b1145218040f5ea" },
+    })
+    .lean();
+    const evenements = await evenementModel.find().lean();
+  const user = await userModel.find({ _id: "62670ee66b1145218040f5ea" }).lean();
+  let checkIfLiked = (element) => element == "62670ee66b1145218040f5ea";
+  let eventList = [];
+  evenements.map((ev) => {
+    let obj = ev;
+    if (ev.likes.some(checkIfLiked)) {
+      obj.likedEvent = true;
+      eventList.push(obj);
+      return ev;
     }
-  }
-  return res
-    .status(401)
-    .json({ message: "you must login in to add event to favourite!" });
+    eventList.push(obj);
+    return ev;
+  });
+  res.status(200).json(eventList);
 };
 module.exports.dislikeevenementModel = async (req, res) => {
-  const token = req.cookies.access_token;
-  let decodedToken;
-  if (token) {
-    decodedToken = jwt_decode(token);
-    if (decodedToken && decodedToken.sub) {
-      await evenementModel
-        .findByIdAndUpdate(req.params.evenementModelId, {
-          $pull: { likes: decodedToken.sub },
-        })
-        .lean();
-      await evenementModel
-        .findByIdAndUpdate(req.params.evenementModelId, {
-          $addToSet: { dislikes: decodedToken.sub },
-        })
-        .lean();
-      res.status(200).json({
-        message: "event removed from wishlist!",
-      });
+  // const token = req.cookies.access_token;
+  // let decodedToken;
+  // if (token) {
+  //   decodedToken = jwt_decode(token);
+  //   if (decodedToken && decodedToken.sub) {
+  await evenementModel
+    .findByIdAndUpdate(req.params.evenementModelId, {
+      $pull: { likes: "62670ee66b1145218040f5ea" },
+    })
+    .lean();
+  await evenementModel
+    .findByIdAndUpdate(req.params.evenementModelId, {
+      $addToSet: { dislikes: "62670ee66b1145218040f5ea" },
+    })
+    .lean();
+    const evenements = await evenementModel.find().lean();
+  const user = await userModel.find({ _id: "62670ee66b1145218040f5ea" }).lean();
+  let checkIfLiked = (element) => element == "62670ee66b1145218040f5ea";
+  let eventList = [];
+  evenements.map((ev) => {
+    let obj = ev;
+    if (ev.likes.some(checkIfLiked)) {
+      obj.likedEvent = true;
+      eventList.push(obj);
+      return ev;
     }
-  }
-  return res
-    .status(401)
-    .json({ message: "you must login in to add event to favourite!" });
+    eventList.push(obj);
+    return ev;
+  });
+  res.status(200).json(eventList);
 };
 //search event
 module.exports.searchEvent = async (req, res) => {
@@ -192,45 +219,54 @@ module.exports.upcomingEvent = async (req, res) => {
 module.exports.reservePlace = async (req, res) => {
   const token = req.cookies.access_token;
   const { eventId, nbePlaces } = req.body;
-  
-  let decodedToken;
-  if (token) {
-    decodedToken = jwt_decode(token);
-    if (decodedToken && decodedToken.sub) {
-      let us = await userModel.findOne({ _id: decodedToken.sub }).lean()
-      
-      await evenementModel.updateOne(
-        { _id: eventId },
-        {
-          $inc: {nbrpalacedispo: -nbePlaces},
-          $push: {
-            reservation: {
-              user: us._id,
-              nbre: nbePlaces,
-            },
-          },
-        }
-      ); 
 
-      res.status(200).send({
-        message: "reservation done successfully",
-      });
+  // let decodedToken;
+  // if (token) {
+  //   decodedToken = jwt_decode(token);
+  //   if (decodedToken && decodedToken.sub) {
+  let us = await userModel
+    .findOne({ _id: "62670ee66b1145218040f5ea" /*decodedToken.sub*/ })
+    .lean();
+
+  await evenementModel.updateOne(
+    { _id: eventId },
+    {
+      $inc: { nbrpalacedispo: -nbePlaces },
+      $push: {
+        reservation: {
+          user: us._id,
+          nbre: nbePlaces,
+        },
+      },
     }
-  }
-  return res
-    .status(401)
-    .json({ message: "you must login in to add event to favourite!" });
-};
+  );
+  const evenements = await evenementModel.find().lean();
+  const user = await userModel.find({ _id: "62670ee66b1145218040f5ea" }).lean();
+  let checkIfLiked = (element) => element == "62670ee66b1145218040f5ea";
+  let eventList = [];
+  evenements.map((ev) => {
+    let obj = ev;
+    if (ev.likes.some(checkIfLiked)) {
+      obj.likedEvent = true;
+      eventList.push(obj);
+      return ev;
+    }
+    eventList.push(obj);
+    return ev;
+  });
+  res.status(200).json(eventList);
+}
 module.exports.stats = async (req, res) => {
   let events = await evenementModel
-    .find({}, {nom: 1, nbrpalacedispo: 1}, (err, result) => {
+    .find({}, { nom: 1, nbrpalacedispo: 1 }, (err, result) => {
       if (err) {
         return res.status(422).json({ error: err });
       }
     })
     .lean();
-    events&&events.map((ev)=>{
-      console.log(ev)
-    })
+  events &&
+    events.map((ev) => {
+      console.log(ev);
+    });
   return res.status(200).json(events);
 };

@@ -13,6 +13,9 @@ import Course from "../components/Course/Course";
 import App from "../Backoffice/src/App";
 import Cart from "../components/MarketPlace/pages/Cart";
 
+import Evenement from "../components/Evenement/Evenement";
+import Evenementdetails from "../components/Evenement/components/Evenementdetails";
+
 
 
 const Shape = css`
@@ -68,7 +71,8 @@ const FrontRouter = () => (
             <Route exact path="/product/:id" element={<Product/>}/>
             <Route exact path="/Course" element={<Course/>}/>
             <Route exact path="/cart" element={<Cart/>}/>
-
+            <Route exact path="/evenement" element={<Evenement/>}/>
+            <Route exact path="/Evenementdetails/:id" element={<Evenementdetails/>}/>
 
 
         </Routes>

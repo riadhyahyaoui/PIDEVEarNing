@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const { isEmail } = require('validator');
-var bcrypt = require('bcryptjs');
+const { isEmail } = require("validator");
+var bcrypt = require("bcryptjs");
 
 const { Schema } = mongoose;
 
@@ -25,23 +25,23 @@ const userSchema = new Schema(
       trim: true,
       unique: true,
       lowercase: true,
-      validate: [isEmail, 'Please enter a valid email']
+      validate: [isEmail, "Please enter a valid email"],
     },
     password: {
       type: String,
       required: true,
-      minlength: [6, 'Minimum password length is 6 characters'],
+      minlength: [6, "Minimum password length is 6 characters"],
     },
 
-    role:{
-        type: String,
-        enum: ['superadmin','admin','user'],
-        required: true
+    role: {
+      type: String,
+      enum: ["superadmin", "admin", "user"],
+      required: true,
     },
     method: {
-        type: String,
-        enum: ['local', 'google', 'facebook'],
-        required: true
+      type: String,
+      enum: ["local", "google", "facebook"],
+      required: true,
     },
     gender: {
       type: String,
@@ -56,33 +56,29 @@ const userSchema = new Schema(
       default: "",
     },
     secretToken: {
-      type: String
+      type: String,
     },
     Isactive: {
-      type: Boolean
+      type: Boolean,
     },
     banned: {
-      type: Boolean,default:false
+      type: Boolean,
+      default: false,
     },
-    Passwordtoken:{
-      type:String
+    Passwordtoken: {
+      type: String,
     },
-    followers: [
-      { type: Schema.Types.ObjectId, ref: "User" }
-    ],
-    following: [
-      { type: Schema.Types.ObjectId, ref: "User" }],
+    followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    favouriteEvent: [{ type: Schema.Types.ObjectId, ref: "evenement" }],
+    following: [{ type: Schema.Types.ObjectId, ref: "User" }],
 
-      playlist: [
-        { type: Schema.Types.ObjectId, ref: "Playlist" }],
-  PasswordResetDate: {
-      type:Date
-  },
+    playlist: [{ type: Schema.Types.ObjectId, ref: "Playlist" }],
+    PasswordResetDate: {
+      type: Date,
+    },
+
     //Teymour
-      karaoke: [
-          { type: Schema.Types.ObjectId, ref: "Karaoke" }
-      ],
-
+    karaoke: [{ type: Schema.Types.ObjectId, ref: "Karaoke" }],
   },
   {
     timestamps: true,
@@ -90,12 +86,10 @@ const userSchema = new Schema(
 );
 userSchema.methods.isValidPassword = async function (newPass) {
   try {
-
-      return await bcrypt.compare(newPass, this.password)
-
+    return await bcrypt.compare(newPass, this.password);
   } catch (error) {
-      throw new Error(error);
+    throw new Error(error);
   }
-}
+};
 
 module.exports = mongoose.model("User", userSchema);

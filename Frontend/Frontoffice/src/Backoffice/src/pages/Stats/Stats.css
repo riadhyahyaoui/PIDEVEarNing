@@ -1,7 +1,5 @@
 .productList{
-    flex: 1;
-    width: 150px;
-    height: 150px;
+    flex: 4;
 }
 
 .productListItem{

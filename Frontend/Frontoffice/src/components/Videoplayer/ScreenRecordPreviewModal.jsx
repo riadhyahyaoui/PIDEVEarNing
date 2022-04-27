@@ -3,7 +3,6 @@ import { Modal, ModalBody, ModalHeader, Button, Row } from 'reactstrap';
 import RecordRTC from 'recordrtc';
 import axios from 'axios';
 
-
 import './ScreenRecordPreviewModal.scss';
 
 var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { useNavigate ,Router} from 'react-router-dom'
+import Evenements from "../Evenement/components/Evenements";
 
 const Container = styled.div`
   height: 50px;
@@ -66,6 +67,7 @@ const Navbar = () => {
                      <Link to="/karaoke"> <MenuItem>Karaoké</MenuItem> </Link>
                         <Link to="/emotion"><MenuItem>Music Mood</MenuItem></Link>
                         <Link to="/marketplace"><MenuItem>MarketPlace</MenuItem></Link>
+                        <Link to="/evenement"><MenuItem>Evenement</MenuItem></Link>
                         <MenuItem>Contact</MenuItem>
                     </Menu>
                 </Left>

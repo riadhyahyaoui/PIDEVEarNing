@@ -13,17 +13,17 @@ router.put("/:id", evenementController.updateevenement);
 router.delete("/:id", evenementController.deleteevenement);
 router.put(
   "/likeevenementModel/:evenementModelId",
-  Log,
+  
   evenementController.likeevenementModel
 );
 router.put(
   "/dislikeevenementModel/:evenementModelId",
-  Log,
+  
   evenementController.dislikeevenementModel
 );
 router.get("/upcomingEvent/ev", evenementController.upcomingEvent);
 router.get("/stats/ev", evenementController.stats);
 router.get("/search/:search", evenementController.searchEvent);
-router.post("/reserver/ev", Log, evenementController.reservePlace);
+router.post("/reserver/ev", evenementController.reservePlace);
 
 module.exports = router;

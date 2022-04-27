@@ -13,7 +13,9 @@ import React from "react";
 import NewCourse from "./pages/NewCourse/NewCourse";
 import Course from "./pages/Course/Course";
 import CourseList from "./pages/CourseList/CourseList";
-
+import Calendar from "./pages/Calendar/Calendar";
+import Stats from "./pages/Stats/Stats";
+import AddEvents from "../../components/Evenement/components/AddEvents";
 function App() {
   return (
     <div>
@@ -47,6 +49,10 @@ function App() {
           <Route path="/newproduct" element={<NewProduct />}/>
 
           <Route path="/newcourse" element={<NewCourse />}/>
+          
+          <Route path="/calendar" element={<Calendar />}/>
+          <Route path="/stats" element={<Stats />}/>
+          <Route path="/addEvent" element={<AddEvents />}/>
 
 
         </Routes>
