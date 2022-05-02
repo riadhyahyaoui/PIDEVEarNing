@@ -1,45 +1,54 @@
-import React from "react";
-
+import React, {useEffect, useState} from "react";
+import {FlippingCardBack, FlippingCardFront, FlippingCard} from 'react-ui-cards';
+import axios from "axios";
+import Karaoke from "../../img/backflip.jpg";
 const Course = () => {
-    let imgs = [
-        'https://res.cloudinary.com/stealthman22/image/upload/v1586308024/new-portfolio/hero/time-lapse-photography-of-waterfalls-during-sunset-210186.jpg',
-        'https://res.cloudinary.com/stealthman22/image/upload/v1586308023/new-portfolio/hero/two-cargo-ships-sailing-near-city-2144905.jpg',
-    ];
+    const [courses,setCourses]=useState([])
+    useEffect(()=>{
+
+        axios.get(`//localhost:5000/api/course/`)
+            .then((response) => {
+                for(let i=0 ;i<response.data.length;i++) {
+                    response.data[i].id = response.data[i]._id
+                    response.data[i].beginner=response.data[i].beginner.length;
+                    response.data[i].medium=response.data[i].medium.length;
+                    response.data[i].advanced=response.data[i].advanced.length;
+                }
+                setCourses(response.data)
+                console.log("response");
+                //console.log(res);
+                console.log(response.data);
+
+            })
+            .catch((e) => {
+                console.log(e);
+                console.log("response");
+            });
+
+    },[])
 
 
     return (
-<div className="section layout_padding">
-    <div className="container">
-        <div className="row">
-            <div className="col-md-12">
-                <div className="full">
-                    <div className="heading_main text_align_center">
-                        <h2><span>Popular </span>Courses</h2>
-                    </div>
-                </div>
-            </div>
-            <div className="col-md-4">
-                <div className="full blog_img_popular">
-                    <img className="img-responsive" crossOrigin="anonymous"  src="http://i.pinimg.com/236x/41/8f/77/418f7742c4409f2b5688509b09be62fd--house-music-color-splash.jpg" alt="#"/>
-                    <h4>Financial Accounting</h4>
-                </div>
-            </div>
-            <div className="col-md-4">
-                <div className="full blog_img_popular">
-                    <img className="img-responsive" crossOrigin="anonymous" src="../../img/p2.png" alt="#"/>
-                    <h4>Managerial Accounting</h4>
-                </div>
-            </div>
-            <div className="col-md-4">
-                <div className="full blog_img_popular">
-                    <img className="img-responsive" crossOrigin="anonymous" src="../../img/p3.png" alt="#"/>
-                    <h4>Intermediate Accounting</h4>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        <span>
+<div style={{fontSize:'46px',marginLeft:'45%'}}>Our Courses</div>
+            {courses.map((c)=>(
+                <FlippingCard>
+                    <FlippingCardBack >
+                        <div style={{backgroundImage: `url(${Karaoke})`,backgroundPosition: 'center',
+                            backgroundSize: 'cover',
+                            backgroundRepeat: 'no-repeat'}}>
+                            <div color='white'>{c.name} Course</div>
+                            <div>Description : {c.description}</div>
 
+                        </div>
+                    </FlippingCardBack>
+                    <FlippingCardFront>
+                        <img style={{width:'100%'}} crossOrigin="anonymous" src={c.imgLink} alt=""  />
+
+                    </FlippingCardFront>
+                </FlippingCard>
+            ))}
+</span>
     );
 };
 

@@ -1,16 +1,49 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useParams} from "react-router-dom";
 import "./course.css";
 import Chart from "../../components/chart/Chart"
 import {productData} from "../../dummyData"
 import { Publish } from "@material-ui/icons";
+import axios from "axios";
+import NewCourse from "../NewCourse/NewCourse";
 
+
+let bname=[]
+let mname=[]
+let aname=[]
+let bvidLink=[]
+let mvidLink=[]
+let avidLink=[]
+let beginer=[]
+let medium=[]
+let advanced=[]
+let val=false
 export default function Course() {
+    const {courseId} = useParams()
+    const [course,setCourse]=useState(null)
+    useEffect(  () => {
+            axios.get(`//localhost:5000/api/course/find/` + courseId)
+            .then((response) => {
+
+                setCourse(response.data)
+
+
+            })
+            .catch((e) => {
+                console.log(e);
+                console.log("response");
+            });
+    },[])
+
+
+
+
   return (
     <div className="product">
+
       <div className="productTitleContainer">
-        <h1 className="productTitle">Product</h1>
-        <Link to="back/newproduct">
+        <h1 className="productTitle">Course</h1>
+        <Link to="../../back/newcourse">
           <button className="productAddButton">Create</button>
         </Link>
       </div>
@@ -20,56 +53,59 @@ export default function Course() {
           </div>
           <div className="productTopRight">
               <div className="productInfoTop">
-                  <img src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" className="productInfoImg" />
-                  <span className="productName">Apple Airpods</span>
+                  <img crossOrigin="anonymous" src={course ? course.imgLink :null} alt={course ? course.imgLink :null} className="productInfoImg" />
+                  <span className="productName">{course ? course.name :null}</span>
               </div>
               <div className="productInfoBottom">
                   <div className="productInfoItem">
                       <span className="productInfoKey">id:</span>
-                      <span className="productInfoValue">123</span>
+                      <span className="productInfoValue">{course ? course._id:null}</span>
                   </div>
                   <div className="productInfoItem">
-                      <span className="productInfoKey">sales:</span>
-                      <span className="productInfoValue">5123</span>
+                      <span className="productInfoKey">description:</span>
+                      <span className="productInfoValue">{course ? course.description:null}</span>
                   </div>
                   <div className="productInfoItem">
-                      <span className="productInfoKey">active:</span>
-                      <span className="productInfoValue">yes</span>
+                      <span className="productInfoKey">Beginner Lessons :</span>
+                      <span className="productInfoValue">{course ? course.beginner.length:null}</span>
                   </div>
                   <div className="productInfoItem">
-                      <span className="productInfoKey">in stock:</span>
-                      <span className="productInfoValue">no</span>
+                      <span className="productInfoKey">Medium Lessons :</span>
+                      <span className="productInfoValue">{course ? course.medium.length:null}</span>
+                  </div>
+                   <div className="productInfoItem">
+                      <span className="productInfoKey">Advanced Lessons :</span>
+                      <span className="productInfoValue">{course ? course.advanced.length:null}</span>
                   </div>
               </div>
           </div>
       </div>
       <div className="productBottom">
-          <form className="productForm">
+          <div className="productForm">
               <div className="productFormLeft">
-                  <label>Product Name</label>
-                  <input type="text" placeholder="Apple AirPod" />
-                  <label>In Stock</label>
-                  <select name="inStock" id="idStock">
-                      <option value="yes">Yes</option>
-                      <option value="no">No</option>
-                  </select>
-                  <label>Active</label>
-                  <select name="active" id="active">
-                      <option value="yes">Yes</option>
-                      <option value="no">No</option>
-                  </select>
+                  {/*<label>{course ? course.name:null} Course</label>*/}
+
+<NewCourse
+    upid={course ? course._id:null}
+    upname={course ? course.name:null}
+    upimgLink={course ? course.imgLink:null}
+    upprix={course ? course.prix:null}
+    updescription={course ? course.description:null}
+    upbeginner={course ? course.beginner:null}
+    upmedium={course ? course.medium:null}
+    upadvanced={course ? course.advanced:null}
+/>
+
               </div>
               <div className="productFormRight">
                   <div className="productUpload">
-                      <img src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" className="productUploadImg" />
-                      <label for="file">
-                          <Publish/>
-                      </label>
-                      <input type="file" id="file" style={{display:"none"}} />
+                      <img crossOrigin="anonymous" src={course ? course.imgLink :null} alt="" className="productUploadImg" />
+
+
                   </div>
-                  <button className="productButton">Update</button>
+
               </div>
-          </form>
+          </div>
       </div>
     </div>
   );

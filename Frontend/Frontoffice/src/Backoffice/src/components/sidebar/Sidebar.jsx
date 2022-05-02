@@ -28,27 +28,23 @@ export default function Sidebar() {
               Home
             </li>
             </Link>
-            <Link to="calendar" className="link">
             <li className="sidebarListItem">
               <Timeline className="sidebarIcon" />
-              Calendrier
+              Analytics
             </li>
-            </Link>
-            <Link to="stats" className="link">
             <li className="sidebarListItem">
               <TrendingUp className="sidebarIcon" />
-              Statistique
+              Sales
             </li>
-            </Link>
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle"></h3>
+          <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
-            <Link to="/back/addEvent" className="link">
+            <Link to="/back/users" className="link">
               <li className="sidebarListItem">
                 <PermIdentity className="sidebarIcon" />
-                add Event
+                Users
               </li>
             </Link>
             <Link to="/back/products" className="link">
