@@ -1,0 +1,8 @@
+us {"fullname":"hedix ",
+        "username": "newUserName",
+        "email":"ideash01@gmail.com",
+        "password": "passwordHash",
+        "gender":"male",
+        "mobile":"27253677",
+        "address":"mannouba"
+        }
