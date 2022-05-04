@@ -1,7 +1,7 @@
 export const sliderItems = [
     {
         id: 1,
-        img: "https://i.ibb.co/XsdmR2c/1.png",
+        img: "https://www.vhv.rs/dpng/d/416-4167466_guitar-musical-instrument-clip-art-music-instruments-png.png",
         title: "SUMMER SALE",
         desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
         bg: "f5fafd",
@@ -25,21 +25,21 @@ export const sliderItems = [
 export const categories = [
     {
         id: 1,
-        img: "https://images.pexels.com/photos/5886041/pexels-photo-5886041.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        title: "SHIRT STYLE!",
-        cat:"Piano",
+        img: "https://imgix.ranker.com/user_node_img/117/2323622/original/valved-brass-instruments-all-musical-instruments-photo-u1?auto=format&q=60&fit=crop&fm=pjpg&dpr=2&w=375",
+        title: "Brass",
+        cat:"Brass",
     },
     {
         id: 2,
-        img: "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        title: "LOUNGEWEAR LOVE",
-        cat: "Old",
+        img: "https://cdn.radiofrance.fr/s3/cruiser-production/2021/07/5d73e3d2-2306-4c84-a1de-6a5daa4f4a3f/838_gettyimages-665692873.jpg",
+        title: "Keyboard",
+        cat: "Keyboard",
     },
     {
         id: 3,
-        img: "https://images.pexels.com/photos/5480696/pexels-photo-5480696.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-        title: "LIGHT JACKETS",
-        cat:"Guitare"
+        img: "https://c.wallhere.com/photos/16/80/violin_musical_instrument-79413.jpg!d",
+        title: "Bowed",
+        cat:"Bowed"
     },
 ];
 

@@ -75,7 +75,6 @@ const Navbar = () => {
         <Container>
             <Wrapper>
                 <Left>
-                    <Language>EN</Language>
                     <SearchContainer>
                         <Input placeholder="Search" />
                         <Search style={{ color: "gray", fontSize: 16 }} />
@@ -85,8 +84,6 @@ const Navbar = () => {
                     <Logo>Your Instruments Marketplace</Logo>
                 </Center>
                 <Right>
-                    <MenuItem>REGISTER</MenuItem>
-                    <MenuItem>SIGN IN</MenuItem>
                     <Link to={"/cart"}>
                         <MenuItem>
                             <Badge badgeContent={quantity} color="primary">

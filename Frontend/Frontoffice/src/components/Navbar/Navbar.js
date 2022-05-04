@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
-import { useNavigate ,Router} from 'react-router-dom'
-import Evenements from "../Evenement/components/Evenements";
+import {useSelector} from "react-redux";
 
 const Container = styled.div`
   height: 50px;
@@ -57,6 +55,8 @@ const Navbar = () => {
     /*const handleButtonClick = () => {
         history.push('/f')
     }*/
+    const currentuser=useSelector(state=>state.user.currentUser);
+    const isAdmin=currentuser.isAdmin;
     return (
         <Container>
             <Wrapper>
@@ -68,10 +68,11 @@ const Navbar = () => {
                         <Link to="/emotion"><MenuItem>Music Mood</MenuItem></Link>
                         <Link to="/marketplace"><MenuItem>MarketPlace</MenuItem></Link>
                         <Link to="/evenement"><MenuItem>Evenement</MenuItem></Link>
+                        { isAdmin  && <Link to="/back"><MenuItem>Dashboard</MenuItem></Link>}
                         <MenuItem>Contact</MenuItem>
                     </Menu>
                 </Left>
-                <Button>Sign In</Button>
+              <Link to="/login"><Button>Sign In</Button></Link>
             </Wrapper>
         </Container>
     );

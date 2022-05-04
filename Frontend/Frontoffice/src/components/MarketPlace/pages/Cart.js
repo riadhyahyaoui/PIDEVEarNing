@@ -1,16 +1,17 @@
 import React from "react";
 import { Add, Remove } from "@material-ui/icons";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
-//import StripeCheckout from "react-stripe-checkout";
+import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
-//import {useHistory} from "react-router";
+import {Link, useNavigate} from "react-router-dom";
+import {cleanCart} from "../redux/cartRedux";
 
-//const KEY = process.env.REACT_APP_STRIPE;
+const KEY="pk_test_51KsZQEK1XuELEzIw1dhNVIy20ogncceZMym3SqGzar6USZDPibGDocEi5DgNDl6GJa4ltujHPwbM6hIG4ARPsoMV00KoNR9xJG"
 
 const Container = styled.div``;
 
@@ -161,27 +162,34 @@ const Button = styled.button`
 
 const Cart = () => {
     const cart = useSelector((state) => state.cart);
+    console.log(cart);
     const [stripeToken, setStripeToken] = useState(null);
-    //  const history = useHistory();
+    const history = useNavigate();
+    const dispatch=useDispatch();
 
-    /* const onToken = (token) => {
-         setStripeToken(token);
-     };
+    const onToken = (token) => {
+        setStripeToken(token);
+    };
+    const clear = ()=> {
+        dispatch(cleanCart);
+        console.log(cart);
+    }
 
-     useEffect(() => {
-         const makeRequest = async () => {
-             try {
-                 const res = await userRequest.post("/checkout/payment", {
-                     tokenId: stripeToken.id,
-                     amount: 500,
-                 });
-                 history.push("/success", {
-                     stripeData: res.data,
-                     products: cart, });
-             } catch {}
-         };
-         stripeToken && makeRequest();
-     }, [stripeToken, cart.total, history]);*/
+    useEffect(() => {
+        const makeRequest = async () => {
+            try {
+                /*  const res = await userRequest.post("/checkout/payment", {
+                      tokenId: stripeToken.id,
+                      amount: 500,
+                  });*/
+                history('/success',{state:{cart:cart}});
+                /*  history.push("/success",{
+                      stripeData: res.data,
+                      products: cart, });*/
+            } catch {}
+        };
+        stripeToken && makeRequest();
+    }, [stripeToken, cart.total, history]);
     return (
         <Container>
             <Navbar />
@@ -189,12 +197,22 @@ const Cart = () => {
             <Wrapper>
                 <Title>YOUR BAG</Title>
                 <Top>
-                    <TopButton>CONTINUE SHOPPING</TopButton>
+                    <Link to="/marketplace">
+                        <TopButton>CONTINUE SHOPPING</TopButton>
+                    </Link>
                     <TopTexts>
                         <TopText>Shopping Bag(2)</TopText>
                         <TopText>Your Wishlist (0)</TopText>
                     </TopTexts>
-                    <TopButton type="filled">CHECKOUT NOW</TopButton>
+                    <StripeCheckout  name="EarnNing"
+                                     billingAddress
+                                     shippingAddress
+                                     description={`Your total is $${cart.total}`}
+                                     amount={cart.total * 100}
+                                     token={onToken}
+                                     stripeKey={KEY}>
+                        <TopButton type="filled">CHECKOUT NOW</TopButton>
+                    </StripeCheckout>
                 </Top>
                 <Bottom>
                     <Info>
@@ -247,7 +265,17 @@ const Cart = () => {
                             <SummaryItemText>Total</SummaryItemText>
                             <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
                         </SummaryItem>
-                        <Button>CHECKOUT NOW</Button>
+                        <StripeCheckout
+                            name="EarnNing"
+                            billingAddress
+                            shippingAddress
+                            description={`Your total is $${cart.total}`}
+                            amount={cart.total * 100}
+                            token={onToken}
+                            stripeKey={KEY}
+                        >
+                            <Button>CHECKOUT NOW</Button>
+                        </StripeCheckout>
                     </Summary>
                 </Bottom>
             </Wrapper>

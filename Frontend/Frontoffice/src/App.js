@@ -6,7 +6,7 @@ import Intro from "./components/Intro/Intro";
 import Feature from "./components/Feature/Feature";
 import FullVideo from "./components/Videoplayer/FullVideo";
 import Router from './Router/Router'
-
+import {useSelector} from "react-redux";
 const Container = styled.div`
   height: 100vh;
   overflow: hidden;
@@ -47,12 +47,14 @@ const PriceShape = styled.div`
 `;
 
 const App = () => {
+    const user = useSelector(state =>state.user.currentUser);
+    console.log("current user ",user);
     const smallScreen = window.screen.width <= 480 ? true : false;
     return (
         <>
 
 
-                <Router/>
+            <Router/>
 
 
 

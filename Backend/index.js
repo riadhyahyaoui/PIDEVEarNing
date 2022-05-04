@@ -8,6 +8,8 @@ const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
 const stripeRoute = require("./routes/stripe");
 const karaokeRoute = require("./routes/karaoke");
+const authRoute = require("./routes/auth");
+
 //const http = require("http")
 const cors = require("cors");
 var server = require('http').Server(app);
@@ -54,6 +56,7 @@ io.on("connection", (socket) => {
 })
 app.use(cors());
 app.use(express.json());
+app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
