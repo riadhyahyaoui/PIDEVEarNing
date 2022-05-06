@@ -55,8 +55,9 @@ const Navbar = () => {
     /*const handleButtonClick = () => {
         history.push('/f')
     }*/
-    const currentuser=useSelector(state=>state.user.currentUser);
-    const isAdmin=currentuser.isAdmin;
+    const currentuser=useSelector(state=>state.user?.currentUser);
+    console.log( "navbar current user :",currentuser);
+    const isAdmin=currentuser?.isAdmin;
     return (
         <Container>
             <Wrapper>

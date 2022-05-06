@@ -46,6 +46,7 @@
     "sass": "^1.50.0",
     "simple-peer": "^9.11.1",
     "styled-components": "^5.3.5",
+    "timeago.js": "^4.0.2",
     "wavesurfer.js": "^6.1.0"
   },
   "scripts": {

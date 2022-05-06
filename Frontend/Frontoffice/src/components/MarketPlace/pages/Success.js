@@ -7,17 +7,17 @@ import {Link} from "react-router-dom";
 
 const Success = () => {
     const location = useLocation();
-    //in Cart.jsx I sent data and cart. Please check that page for the changes.(in video it's only data)
     //const data = location.state.stripeData;
     const cart = location.state.cart;
     console.log(location.state.cart);
-    // const currentUser = useSelector((state) => state.user.currentUser);
+    const currentUser = useSelector((state) => state.user.currentUser);
     const [orderId, setOrderId] = useState(null);
 
     useEffect(() => {
         const createOrder = async () => {
             try {
                 const res = await userRequest.post("/orders", {
+                    userId: currentUser._id,
                     products: cart.products.map((item) => ({
                         productId: item._id,
                         quantity: item._quantity,

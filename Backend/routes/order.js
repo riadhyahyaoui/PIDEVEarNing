@@ -9,13 +9,11 @@ const router = require("express").Router();
 
 //CREATE
 
-router.post("/", async (req, res) => {
+router.post("/", verifyToken, async (req, res) => {
     const newOrder = new Order(req.body);
-    //console.log(newOrder);
 
     try {
         const savedOrder = await newOrder.save();
-        console.log(savedOrder);
         res.status(200).json(savedOrder);
     } catch (err) {
         res.status(500).json(err);
