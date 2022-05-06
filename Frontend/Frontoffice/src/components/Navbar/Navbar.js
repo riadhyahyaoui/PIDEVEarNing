@@ -69,6 +69,7 @@ const Navbar = () => {
                         <Link to="/emotion"><MenuItem>Music Mood</MenuItem></Link>
                         <Link to="/marketplace"><MenuItem>MarketPlace</MenuItem></Link>
                         <Link to="/evenement"><MenuItem>Evenement</MenuItem></Link>
+                        <Link to="/course"><MenuItem>Course</MenuItem></Link>
                         { isAdmin  && <Link to="/back"><MenuItem>Dashboard</MenuItem></Link>}
                         <MenuItem>Contact</MenuItem>
                     </Menu>

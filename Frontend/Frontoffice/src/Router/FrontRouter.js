@@ -17,6 +17,7 @@ import Evenement from "../components/Evenement/Evenement";
 import Evenementdetails from "../components/Evenement/components/Evenementdetails";
 import Success from "../components/MarketPlace/pages/Success";
 import Login from "../components/MarketPlace/pages/Login";
+import Lesson from "../components/Course/Lesson";
 
 
 
@@ -75,6 +76,7 @@ const FrontRouter = () => (
             <Route exact path="/cart" element={<Cart/>}/>
             <Route exact path="/evenement" element={<Evenement/>}/>
             <Route exact path="/Evenementdetails/:id" element={<Evenementdetails/>}/>
+            <Route  path="/Course/:type/:lessonId" element={<Lesson/>}/>
             <Route exact path="/success" element={<Success/>}/>
             <Route exact path="/login" element={<Login/>}/>
 

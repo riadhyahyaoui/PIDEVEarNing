@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const { Schema } = mongoose;
 const UserSchema = new mongoose.Schema(
     {
         username: { type: String, required: true, unique: true },
@@ -10,6 +10,8 @@ const UserSchema = new mongoose.Schema(
             default: false,
         },
         img: { type: String },
+        //Teymour
+        karaoke: [{ type: Schema.Types.ObjectId, ref: "Karaoke" }],
     },
     { timestamps: true }
 );

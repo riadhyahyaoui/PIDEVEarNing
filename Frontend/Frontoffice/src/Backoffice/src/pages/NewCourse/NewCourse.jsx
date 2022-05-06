@@ -106,7 +106,7 @@ const beginputs= (n)=>{
 
           <span><b> Video Link Lesson {i+1}</b></span><input type="text" defaultValue={bvidLink[i]} onChange={(e)=>{bvidLink[i] = e.target.value;setValid(!valid)}} placeholder="Video link" />
           {bvidLink[i] ? bvidLink[i].replaceAll(" ","").length<1 ? validation(false) :validation(true):validation(false)}
-          {bvidLink[i] ? bvidLink[i].replaceAll(" ","").length>=1 && ( bvidLink[i].replaceAll(" ","").length<15 || !bvidLink[i].match("http")) ? validationlink(false) :validationlink(true):null}
+          {bvidLink[i] ? bvidLink[i].replaceAll(" ","").length>=1 && ( bvidLink[i].replaceAll(" ","").length<15 || !bvidLink[i].match("https://www.youtube.com")) ? validationlink(false) :validationlink(true):null}
 
       </div>))
 }
@@ -121,7 +121,7 @@ const mediuminputs= (n)=>{
           {mname[i]? mname[i].replaceAll(" ","").length<4 && mname[i].replaceAll(" ","").length>=1? validationname(false) :validationname(true):null}
           <span><b> Video Link Lesson {i+1}</b></span><input type="text" defaultValue={mvidLink[i]} onChange={(e)=>{mvidLink[i] = e.target.value;setValid(!valid)}} placeholder="Video link" />
           {mvidLink[i] ? mvidLink[i].replaceAll(" ","").length<1 ? validation(false) :validation(true):validation(false)}
-          { mvidLink[i] ? mvidLink[i].replaceAll(" ","").length>=1 && ( mvidLink[i].replaceAll(" ","").length<15 || !mvidLink[i].match("http")) ? validationlink(false) :validationlink(true):null}
+          { mvidLink[i] ? mvidLink[i].replaceAll(" ","").length>=1 && ( mvidLink[i].replaceAll(" ","").length<15 || !mvidLink[i].match("https://www.youtube.com")) ? validationlink(false) :validationlink(true):null}
 
       </div>))
 }
@@ -135,7 +135,7 @@ const advancedinputs= (n)=>{
           {aname[i]? aname[i].replaceAll(" ","").length<4 && aname[i].replaceAll(" ","").length>=1? validationname(false) :validationname(true):null}
           <span><b> Video Link Lesson {i+1}</b></span><input type="text" defaultValue={avidLink[i]} onChange={(e)=>{avidLink[i] = e.target.value;setValid(!valid)}} placeholder="Video link" />
           {avidLink[i] ? avidLink[i].replaceAll(" ","").length<1 ? validation(false) :validation(true):validation(false)}
-          { avidLink[i] ? avidLink[i].replaceAll(" ","").length>=1 && ( avidLink[i].replaceAll(" ","").length<15 || !avidLink[i].match("http")) ? validationlink(false) :validationlink(true):null}
+          { avidLink[i] ? avidLink[i].replaceAll(" ","").length>=1 && ( avidLink[i].replaceAll(" ","").length<15 || !avidLink[i].match("https://www.youtube.com")) ? validationlink(false) :validationlink(true):null}
 
       </div>))
 }

@@ -7,8 +7,9 @@ const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
 const stripeRoute = require("./routes/stripe");
-const karaokeRoute = require("./routes/karaoke");
+const karaokeRoute = require("./routes/Karaoke/karaoke");
 const authRoute = require("./routes/auth");
+const courseRoute = require("./routes/Course/course");
 
 //const http = require("http")
 const cors = require("cors");
@@ -31,9 +32,7 @@ const io = require("socket.io")(server, {
 let x=true;
 io.on("connection", (socket) => {
     socket.emit("me", socket.id)
-    /*io.of("/").adapter.on("create-room", (room) => {
-        console.log(`room ${room} was created`);
-    });*/
+
     socket.on("disconnect", () => {
         socket.broadcast.emit("callEnded");
         x=false;
@@ -49,9 +48,7 @@ io.on("connection", (socket) => {
 
         io.to(data.to).emit("callAccepted", data.signal)
 
-        /*io.of("/").adapter.on("join-room", (room, id) => {
-            console.log(`socket ${id} has joined room ${room}`);
-        });*/
+
     })
 })
 app.use(cors());
@@ -63,6 +60,7 @@ app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", stripeRoute);
 app.use("/api/Karaoke", karaokeRoute);
+app.use("/api/course", courseRoute);
 
 server.listen(process.env.PORT || 5000, () => {
     console.log("Backend server is running!");

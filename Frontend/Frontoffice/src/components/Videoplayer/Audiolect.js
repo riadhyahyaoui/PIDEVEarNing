@@ -1,15 +1,9 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
-//import WaveSurfer from 'react-wavesurfer';
-import {
-    Button, Icon, Paper, withStyles, Typography
-} from '@material-ui/core';
 
-//import Dropzone from 'react-dropzone';
-//import { uploadRequest, uploadReject } from '../../upload/actions';
 import { useDropzone } from 'react-dropzone';
-//import Waveform from "./Waveform";
-let file1;
+
+
 
 
 
@@ -125,11 +119,11 @@ const [file2,setFile2]=useState([]);
 
         ffmpeg.FS('writeFile', 'test', await fetchFile(file3));
         await ffmpeg.run('-i', 'test','-af','pan=stereo|c0=c0|c1=-1*c1','-ac','1', 'test2.mp3');
-        //-i song.mp3 -af pan="stereo|c0=c0|c1=-1*c1" -ac 1 karaoke.mp3
+
 
         const data = ffmpeg.FS('readFile', 'test2.mp3');
         props.song(URL.createObjectURL(new Blob([data.buffer], { type: 'audio/mp3' })));
-        //setVideoSrc(URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' })));
+
         props.songName(file3.path);
     };
     return (

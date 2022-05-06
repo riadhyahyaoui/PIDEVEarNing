@@ -8,16 +8,7 @@ import axios from "axios";
 import NewCourse from "../NewCourse/NewCourse";
 
 
-let bname=[]
-let mname=[]
-let aname=[]
-let bvidLink=[]
-let mvidLink=[]
-let avidLink=[]
-let beginer=[]
-let medium=[]
-let advanced=[]
-let val=false
+
 export default function Course() {
     const {courseId} = useParams()
     const [course,setCourse]=useState(null)

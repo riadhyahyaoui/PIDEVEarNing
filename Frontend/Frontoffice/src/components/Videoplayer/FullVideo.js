@@ -124,7 +124,7 @@ const format = (seconds) => {
 };
 
 
-let uss;
+
 const FullVideo= (props) =>{
 
 
