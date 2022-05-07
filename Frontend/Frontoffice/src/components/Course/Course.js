@@ -5,14 +5,27 @@ import './Course.css';
 import CourseImg from "../../img/cc2.jpg";
 import { Link } from "react-router-dom";
 import DetailCourse from "./DetailCourse";
+import {useDispatch, useSelector} from "react-redux";
+import {addProduct} from "../MarketPlace/redux/cartRedux";
+import {addCourseProduct} from "../MarketPlace/redux/cartCourseRedux";
+import CourseList from "./courseList";
 
 const Course = () => {
     const [courses,setCourses]=useState([])
     const [course,setCourse]=useState()
     const [details,setDetails]=useState(true)
-
-
-
+    const [de,setDe]=useState(true)
+    const dispatch = useDispatch();
+    const quant=useSelector(state=>state.cart.quantity)
+    console.log(quant);
+    const quantity=1
+    const handleClick = (course) => {
+        dispatch(
+            addCourseProduct({ ...course,quantity})
+        );
+        setDe(!de);
+        console.log(quant);
+    };
     function search(name){
         let url='http://localhost:5000/api/course/search/'+name
 
@@ -102,14 +115,14 @@ const Course = () => {
                 </form>
             </div>
             <div className="col-lg-3 col-6 text-right">
-                <a href="" className="btn border">
+                <a  className="btn border">
                     <i className="fas fa-heart text-primary"></i>
                     <span className="badge">0</span>
                 </a>
-                <a href="" className="btn border">
-                    <i className="fas fa-shopping-cart text-primary"></i>
-                    <span className="badge">0</span>
-                </a>
+              <Link to="/courseList">  <a  className="btn border">
+                  <i className="fas fa-shopping-cart text-primary"></i>
+                  <span className="badge">0</span>
+              </a></Link>
             </div>
         </div>
     </div>
@@ -131,7 +144,6 @@ const Course = () => {
             </div>
         </div>
     </div>
-
 
 
     {/*Shop Start*/}
@@ -323,7 +335,7 @@ const Course = () => {
                                         <a  className="btn btn-sm text-dark p-0" onClick={(e)=>{setCourse(c);setDetails(false)}}><i
                                             className="fas fa-eye text-primary mr-1"></i>View <br/> Detail</a>
 
-                                        <a href="" className="btn btn-sm text-dark p-0"><i
+                                        <a  className="btn btn-sm text-dark p-0"  onClick={(e)=>{handleClick(c)}}><i
                                             className="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                                     </div>
                                         </div>

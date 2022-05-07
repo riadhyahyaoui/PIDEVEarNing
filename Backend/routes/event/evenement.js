@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const evenementController = require("../../controllers/event/evenement");
+const evenementController = require("../../models/evenement.js");
 const cors = require("cors");
-const { check, Log, notReqAuthentication } = require("../../middleware/auth");
+
 
 // auth
 

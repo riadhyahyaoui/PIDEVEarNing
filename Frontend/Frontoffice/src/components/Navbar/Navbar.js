@@ -71,7 +71,6 @@ const Navbar = () => {
                         <Link to="/evenement"><MenuItem>Evenement</MenuItem></Link>
                         <Link to="/course"><MenuItem>Course</MenuItem></Link>
                         { isAdmin  && <Link to="/back"><MenuItem>Dashboard</MenuItem></Link>}
-                        <MenuItem>Contact</MenuItem>
                     </Menu>
                 </Left>
               <Link to="/login"><Button>Sign In</Button></Link>

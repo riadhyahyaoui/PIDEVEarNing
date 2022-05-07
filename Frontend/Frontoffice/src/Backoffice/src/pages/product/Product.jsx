@@ -58,8 +58,8 @@ export default function Product() {
     return (
         <div className="product">
             <div className="productTitleContainer">
-                <h1 className="productTitle">Product</h1>
-                <Link to="/newproduct">
+                <h1 className="productTitle">Instrument</h1>
+                <Link to="/back/newproduct">
                     <button className="productAddButton">Create</button>
                 </Link>
             </div>
@@ -78,8 +78,8 @@ export default function Product() {
                             <span className="productInfoValue">{product._id}</span>
                         </div>
                         <div className="productInfoItem">
-                            <span className="productInfoKey">sales:</span>
-                            <span className="productInfoValue">5123</span>
+                            <span className="productInfoKey">Category:  </span>
+                            <span className="productInfoValue">{product.categories}</span>
                         </div>
                         <div className="productInfoItem">
                             <span className="productInfoKey">in stock:</span>
@@ -91,9 +91,9 @@ export default function Product() {
             <div className="productBottom">
                 <form className="productForm">
                     <div className="productFormLeft">
-                        <label>Product Name</label>
+                        <label>Instrument Name</label>
                         <input type="text" placeholder={product.title} />
-                        <label>Product Description</label>
+                        <label>Instrument Description</label>
                         <input type="text" placeholder={product.desc} />
                         <label>Price</label>
                         <input type="text" placeholder={product.price} />

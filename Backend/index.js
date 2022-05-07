@@ -10,7 +10,7 @@ const stripeRoute = require("./routes/stripe");
 const karaokeRoute = require("./routes/Karaoke/karaoke");
 const authRoute = require("./routes/auth");
 const courseRoute = require("./routes/Course/course");
-
+//const eventRoute=require("./routes/event/evenement")
 //const http = require("http")
 const cors = require("cors");
 var server = require('http').Server(app);
@@ -61,6 +61,7 @@ app.use("/api/orders", orderRoute);
 app.use("/api/checkout", stripeRoute);
 app.use("/api/Karaoke", karaokeRoute);
 app.use("/api/course", courseRoute);
+
 
 server.listen(process.env.PORT || 5000, () => {
     console.log("Backend server is running!");

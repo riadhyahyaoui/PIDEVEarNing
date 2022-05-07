@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
-const OrderSchema = new mongoose.Schema(
+const CourseOrderSchema = new mongoose.Schema(
     {
         userId: { type: String },
         products: [
             {
-                courseId: {
+                productId: {
                     type: String,
                 },
                 quantity: {

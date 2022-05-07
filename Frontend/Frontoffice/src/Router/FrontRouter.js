@@ -18,6 +18,7 @@ import Evenementdetails from "../components/Evenement/components/Evenementdetail
 import Success from "../components/MarketPlace/pages/Success";
 import Login from "../components/MarketPlace/pages/Login";
 import Lesson from "../components/Course/Lesson";
+import CourseList from "../components/Course/courseList";
 
 
 
@@ -79,6 +80,7 @@ const FrontRouter = () => (
             <Route  path="/Course/:type/:lessonId" element={<Lesson/>}/>
             <Route exact path="/success" element={<Success/>}/>
             <Route exact path="/login" element={<Login/>}/>
+            <Route exact path="/courseList" element={<CourseList/>}/>
 
         </Routes>
     </div>

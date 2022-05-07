@@ -3,7 +3,7 @@ import Topbar from "./components/topbar/Topbar";
 import "./App.css";
 import Home from "./pages/home/Home";
 import { BrowserRouter as Router, Switch, Route, Routes } from "react-router-dom";
-import UserList from "./pages/userList/UserList";
+import UserList from "./pages/userList/userList";
 import User from "./pages/user/User";
 import NewUser from "./pages/newUser/NewUser";
 import ProductList from "./pages/productList/ProductList";
