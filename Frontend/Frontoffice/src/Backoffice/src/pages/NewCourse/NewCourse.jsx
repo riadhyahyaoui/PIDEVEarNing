@@ -307,7 +307,7 @@ b=b+1
                          <label>Prix</label>
                          <input type="text" defaultValue={props.upprix} onChange={(e) => setPrix(e.target.value)} placeholder="DT"/>
                          {prix.replaceAll(" ","").length<1 ?   validation(false) :validation(true)}
-                         { prix.replaceAll(" ","").length<1 ? null: !prix.match(/(\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})?)\s?(DT|dt|Dt|\$)/) ? validationlink(false,"prix") :validationlink(true,"prix")}
+                         { prix.replaceAll(" ","").length<1 ? null: !prix.match(/(\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})?)\s?($|\$)/) ? validationlink(false,"prix") :validationlink(true,"prix")}
 
                      </div>
 

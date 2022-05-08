@@ -16,15 +16,15 @@ const Course = () => {
     const [details,setDetails]=useState(true)
     const [de,setDe]=useState(true)
     const dispatch = useDispatch();
-    const quant=useSelector(state=>state.cart.quantity)
-    console.log(quant);
+    let quant=useSelector((state)=>state.cartCourse.quantity)
+
+
     const quantity=1
     const handleClick = (course) => {
         dispatch(
             addCourseProduct({ ...course,quantity})
         );
-        setDe(!de);
-        console.log(quant);
+
     };
     function search(name){
         let url='http://localhost:5000/api/course/search/'+name
@@ -36,11 +36,10 @@ const Course = () => {
                     response.data[i].beginner2=response.data[i].beginner.length;
                     response.data[i].medium2=response.data[i].medium.length;
                     response.data[i].advanced2=response.data[i].advanced.length;
+                    response.data[i].prix2=response.data[i].prix.substr(0,response.data[i].prix.length-1);
                 }
                 setCourses(response.data)
-                console.log("response");
-                //console.log(res);
-                console.log(response.data);
+
 
             })
             .catch((e) => {
@@ -51,16 +50,14 @@ const Course = () => {
                             response.data[i].beginner2=response.data[i].beginner.length;
                             response.data[i].medium2=response.data[i].medium.length;
                             response.data[i].advanced2=response.data[i].advanced.length;
+                            response.data[i].prix2=response.data[i].prix.substr(0,response.data[i].prix.length-1);
                         }
                         setCourses(response.data)
-                        console.log("response");
-                        //console.log(res);
-                        console.log(response.data);
+
 
                     })
                     .catch((e) => {
-                        console.log(e);
-                        console.log("response");
+
                     });
             });
     }
@@ -74,16 +71,15 @@ const Course = () => {
                     response.data[i].beginner2=response.data[i].beginner.length;
                     response.data[i].medium2=response.data[i].medium.length;
                     response.data[i].advanced2=response.data[i].advanced.length;
+                    response.data[i].prix2=response.data[i].prix.substr(0,response.data[i].prix.length-1);
+
                 }
                 setCourses(response.data)
-                console.log("response");
-                //console.log(res);
-                console.log(response.data);
+
 
             })
             .catch((e) => {
-                console.log(e);
-                console.log("response");
+
             });
 
     },[])
@@ -121,7 +117,7 @@ const Course = () => {
                 </a>
               <Link to="/courseList">  <a  className="btn border">
                   <i className="fas fa-shopping-cart text-primary"></i>
-                  <span className="badge">0</span>
+                  <span className="badge">{quant}</span>
               </a></Link>
             </div>
         </div>

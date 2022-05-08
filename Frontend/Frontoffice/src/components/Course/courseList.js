@@ -9,6 +9,8 @@ import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 
 import {Link, useNavigate} from "react-router-dom";
+import {clear} from "../MarketPlace/redux/cartCourseRedux";
+
 
 
 const KEY="pk_test_51KsZQEK1XuELEzIw1dhNVIy20ogncceZMym3SqGzar6USZDPibGDocEi5DgNDl6GJa4ltujHPwbM6hIG4ARPsoMV00KoNR9xJG"
@@ -167,6 +169,12 @@ const CourseList = () => {
     const history = useNavigate();
     const dispatch=useDispatch();
 
+    const handleClear = () => {
+        dispatch(
+            clear()
+        );
+
+    };
     const onToken = (token) => {
         setStripeToken(token);
     };
@@ -194,7 +202,7 @@ const CourseList = () => {
             <Wrapper>
                 <Title>YOUR BAG</Title>
                 <Top>
-                    <Link to="/marketplace">
+                    <Link to="/course">
                         <TopButton>CONTINUE SHOPPING</TopButton>
                     </Link>
                     <TopTexts>
@@ -204,8 +212,8 @@ const CourseList = () => {
                     <StripeCheckout  name="EarnNing"
                                      billingAddress
                                      shippingAddress
-                                  /*   description={`Your total is $${cart.total}`}
-                                     amount={cart.total * 100}*/
+                                     description={`Your total is $${cart.total}`}
+                                     amount={cart.total * 100}
                                      token={onToken}
                                      stripeKey={KEY}>
                         <TopButton type="filled">CHECKOUT NOW</TopButton>
@@ -219,7 +227,7 @@ const CourseList = () => {
                                     <Image src={product.imgLink} />
                                     <Details>
                                         <ProductName>
-                                            <b>Product:</b> {product.name}
+                                            <b>Product:</b> {product.name} Course
                                         </ProductName>
                                         <ProductId>
                                             <b>ID:</b> {product._id}
@@ -233,9 +241,9 @@ const CourseList = () => {
                                         <ProductAmount>{product.quantity}</ProductAmount>
                                         <Remove />
                                     </ProductAmountContainer>
-                                   {/* <ProductPrice>
-                                        $ {product.prix * product.quantity}
-                                    </ProductPrice>*/}
+                                    <ProductPrice>
+                                        $ {product.prix2 * product.quantity}
+                                    </ProductPrice>
                                 </PriceDetail>
                             </Product>
                         ))}
@@ -245,9 +253,9 @@ const CourseList = () => {
                         <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                         <SummaryItem>
                             <SummaryItemText>Subtotal</SummaryItemText>
-{/*
+
                             <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
-*/}
+
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -265,13 +273,15 @@ const CourseList = () => {
                             name="EarnNing"
                             billingAddress
                             shippingAddress
-                         /*   description={`Your total is $${cart.total}`}
-                            amount={cart.total * 100}*/
+                           description={`Your total is $${cart.total}`}
+                            amount={cart.total * 100}
                             token={onToken}
                             stripeKey={KEY}
                         >
                             <Button>CHECKOUT NOW</Button>
+
                         </StripeCheckout>
+                        <Button style={{width:'50%'}} onClick={(e)=>{handleClear()}}>CLEAR</Button>
                     </Summary>
                 </Bottom>
             </Wrapper>
