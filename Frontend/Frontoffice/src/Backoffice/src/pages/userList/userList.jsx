@@ -1,73 +1,112 @@
-import React from "react";
+
 import "./userList.css";
-import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { userRows } from "../../dummyData";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { GetUsers,BanUser,UNBanUser } from "../../constant/action_constant"
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { Table } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function UserList() {
-  const [data, setData] = useState(userRows);
+  const dispatch = useDispatch();
+  const [textButton, setTextButton] = useState("");
+  const history = useNavigate();
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
+const [AllUsers, setAllUsers] = useState([]);
 
-  const columns = [
-    { field: "id", headerName: "ID", width: 90 },
-    {
-      field: "user",
-      headerName: "User",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="userListUser">
-            <img className="userListImg" src={params.row.avatar} alt="" />
-            {params.row.username}
-          </div>
-        );
-      },
-    },
-    { field: "email", headerName: "Email", width: 200 },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 120,
-    },
-    {
-      field: "transaction",
-      headerName: "Transaction Volume",
-      width: 160,
-    },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={"../user/" + params.row.id}>
-              <button className="userListEdit">Edit</button>
-            </Link>
-            <DeleteOutline
-              className="userListDelete"
-              onClick={() => handleDelete(params.row.id)}
-            />
-          </>
-        );
-      },
-    },
-  ];
+useEffect(() => {
+    dispatch(GetUsers()).then((res) => {
+        if(res!=null)
+            {            
+              setAllUsers(res.UsersList)
+            }
 
+    });
+
+}, []);
+
+const BAN = useCallback (
+  
+  (emailrecieve)=>()=>{
+    let obj ={
+      email:emailrecieve
+    }  
+    
+    console.log(obj);
+    dispatch(BanUser(obj,history));
+  }
+)
+const UNBAN = useCallback (
+  (emailrecieve)=>()=>{
+    let obj ={
+      email:emailrecieve
+    }  
+    dispatch(UNBanUser(obj,history));
+
+  }
+)
   return (
-    <div className="userList">
-      <DataGrid
-        rows={data}
-        disableSelectionOnClick
-        columns={columns}
-        pageSize={8}
-        checkboxSelection
-      />
-    </div>
+    <Table striped bordered hover size="sm">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>UserName</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    {AllUsers.map((item, index) => {
+                        return (
+    <tr key={index} >
+        <td>{item._id}</td>
+        <td>{item.username}</td>
+        <td>{item.email}</td>
+        <td>
+        {
+          item.banned == true && <p style={NotShared}> ✘</p>
+          
+        }
+        {
+          item.banned == false && <p style={Shared}>✔</p>
+          
+        }
+        </td>
+        <td> 
+          
+
+{
+          item.banned == false && 
+          <button type="button" className="userListEdit" data-toggle="dropdown"onClick={BAN(item.email)}>
+            Banned
+          </button>
+}
+{
+          item.banned == true && 
+          <button type="button" className="userListEdit2" data-toggle="dropdown"onClick={UNBAN(item.email)}>
+            UnBanned
+          </button>
+}
+
+          
+          </td>
+
+      </tr>  
+         )
+        })
+    }
+
+    </tbody>
+  </Table>
   );
+}
+
+const Shared = {
+  color: "green"
+}
+const NotShared = {
+  color: "red"
 }

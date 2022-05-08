@@ -13,8 +13,8 @@ router.route('/superadmin/allusers').get(authAdminCtrl.allUsers);
 router.route('/superadmin/makeUser').post(authAdminCtrl.makeUser);
 router.route('/superadmin/makeAdmin').post(authAdminCtrl.makeAdmin);
 router.get("/superadmin/getAllUser", authAdminCtrl.getAll);
+router.post("/superadmin/ban", authAdminCtrl.banUser);
 
-router.route('/admin/ban').post(authAdminCtrl.banUser);
-router.route('/admin/unban').post(authAdminCtrl.unbanUser);
+router.route('/superadmin/unban').post(authAdminCtrl.unbanUser);
 
 module.exports = router;
