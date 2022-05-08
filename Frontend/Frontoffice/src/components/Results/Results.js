@@ -19,14 +19,13 @@ const Results = ({ results, processing }) => {
   }
   if (!processing && results && results.length > 0) {
     const url=`https://www.youtube.com/results?search_query=${results[0].expressions.asSortedArray()[0].expression}+music`
-   // window.open(url, '_blank');
-    //openInNewTab();
+   //window.open(url, '_blank');
+  //  openInNewTab();
     return (
       <div className="results">
         {results.length > 1 ? (
           <div>
             <p>I think...</p>
-            <button onClick={(e)=>{window.open(url, '_blank')}}>open</button>
             {results.map((result, i) => (
               <div className="results__wrapper" key={i}>
                 <div style={{ width: '300px' }}>
@@ -53,6 +52,7 @@ const Results = ({ results, processing }) => {
               <FontAwesomeIcon icon={mapExpressionToEmoji(results[0].gender)} size="4x" />
 
             </div>
+              <button onClick={()=>window.open(url, '_blank')}>Recommend me Songs </button>
           </div>
         )}
       </div>

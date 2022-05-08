@@ -9,7 +9,7 @@ import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
 import {Link, useNavigate} from "react-router-dom";
-import {cleanCart} from "../redux/cartRedux";
+import {clear} from "../redux/cartRedux";
 
 const KEY="pk_test_51KsZQEK1XuELEzIw1dhNVIy20ogncceZMym3SqGzar6USZDPibGDocEi5DgNDl6GJa4ltujHPwbM6hIG4ARPsoMV00KoNR9xJG"
 
@@ -170,10 +170,12 @@ const Cart = () => {
     const onToken = (token) => {
         setStripeToken(token);
     };
-    const clear = ()=> {
-        dispatch(cleanCart);
-        console.log(cart);
-    }
+    const handleClear = () => {
+        dispatch(
+            clear()
+        );
+
+    };
 
     useEffect(() => {
         const makeRequest = async () => {
@@ -276,6 +278,7 @@ const Cart = () => {
                         >
                             <Button>CHECKOUT NOW</Button>
                         </StripeCheckout>
+                        <Button style={{width:'50%'}} onClick={(e)=>{handleClear()}}>CLEAR</Button>
                     </Summary>
                 </Bottom>
             </Wrapper>
