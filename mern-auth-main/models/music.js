@@ -1,3 +1,4 @@
+const { boolean } = require("joi");
 const mongoose =require ("mongoose");
 const { Schema } = mongoose;
 
@@ -11,9 +12,15 @@ const musicSchema = mongoose.Schema({
     ],
     dislikes: [
       { type: Schema.Types.ObjectId,default:0, ref: "User" }],
+      listViews: [
+        { type: Schema.Types.ObjectId,default:0, ref: "User" }],
     duration:{type:Number},
     genre: {type:String},
     artistName: {type:String},
+    shared: {
+      type: Boolean,default:true
+    },
+
     image: {type: String,default: 'placeholder.jpg'},
     comments: [
         {

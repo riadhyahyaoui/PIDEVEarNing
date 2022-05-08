@@ -6,6 +6,7 @@ import { createFaLibrary } from '../../helpers/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Switch from 'react-switch';
 import Camera from '../Camera/Camera';
+import Navbar2 from "../Navbar/Navbar";
 
 import './EmotionCamera.css';
 createFaLibrary();
@@ -16,6 +17,7 @@ function EmotionCamera() {
     return (
         <div className="App">
             <header>
+                <Navbar2/>
                 <div className="App__header">
                     <h1>
                         <span>Ear-ning Emotion Song Recommander</span>

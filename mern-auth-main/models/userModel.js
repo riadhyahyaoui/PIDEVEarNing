@@ -79,6 +79,9 @@ const userSchema = new Schema(
 
     //Teymour
     karaoke: [{ type: Schema.Types.ObjectId, ref: "Karaoke" }],
+	  image : {
+    type: String
+  },
   },
   {
     timestamps: true,

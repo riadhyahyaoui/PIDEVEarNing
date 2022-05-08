@@ -4,6 +4,10 @@ import React from "react";
 import styled from "styled-components";
 import Woman from '../../img/Woman.png';
 import AnimatedShapes from "../AnimatedShapes/AnimatedShapes";
+import '../../App.css'
+import BackgroundImage from '../../assets/images/back.jpg'
+import { Link } from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
 const Container = styled.div`
   height: calc(100vh - 50px);
   display: flex;
@@ -97,29 +101,29 @@ const Image = styled.img`
 
 const Intro = () => {
     return (
-        <Container>
-            <Left>
-                <Title>Adventures in creative age</Title>
-                <Desc>
-                    We believe that designing products and services in close partnership
-                    with our clients is the only way to have a real impact on their
-                    business.
-                </Desc>
-                <Info>
-                    <Button>START A PROJECT</Button>
-                    <Contact>
-                        <Phone>Call Us (012) 345 - 6789</Phone>
-                        <ContactText>For any question or concern</ContactText>
-                    </Contact>
-                </Info>
-            </Left>
-            <Right><Image src={Woman}/></Right>
-            <AnimatedShapes></AnimatedShapes>
+      <header style={ HeaderStyle }>
+        <Navbar/>
 
-
-
-        </Container>
+      <h1 className="main-title text-center">No Music No Life</h1>
+      <p className="main-para text-center">join us now and don't waste time</p>
+      <div className="buttons text-center">
+          <Link to="/login">
+          <button className="primary-button" id="reg_btn"><span>login </span></button>
+          </Link>
+          <Link to="/register">
+              <button className="primary-button" id="reg_btn"><span>register </span></button>
+          </Link>
+      </div>
+  </header>
     );
 };
 
 export default Intro;
+const HeaderStyle = {
+  width: "100%",
+  height: "100vh",
+  background: `url(${BackgroundImage})`,
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover"
+}

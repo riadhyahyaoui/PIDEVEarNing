@@ -6,6 +6,7 @@ const chatBoxSchema = mongoose.Schema({
     content: {type:String,required:true},
     dateEnvoi: {type:Date,default:Date.now()},
     sourdine: {type:Boolean,default:false},
+    seen : {type:Boolean,default:false}
 });
 const chatBox = mongoose.model("ChatBox", chatBoxSchema);
 module.exports = chatBox;

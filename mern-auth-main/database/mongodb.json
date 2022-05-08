@@ -1,5 +1,5 @@
 {
     "mongo":{
-        "uri":"mongodb+srv://esprit:esprit@traversycluster.k7w0l.mongodb.net/pi?retryWrites=true&w=majority"
+        "uri":"mongodb://localhost:27017/mern"
     }
 }

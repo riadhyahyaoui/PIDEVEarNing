@@ -106,10 +106,10 @@ const musicAdminCtrl = {
                 });
             });
     },
-    fetechPlaylistByName: async (req, res) => { },
-    updateMyPlaylist: async (req, res) => { },
+   
     deletePlaylist: async (req, res) => {
         try {
+
             const playlistres = await playlist.findById(req.params.id)
             if (!playlistres) {
                 res.status(400).json({ msg: "playlist does not exist." });
@@ -124,5 +124,36 @@ const musicAdminCtrl = {
             return res.status(500).json(err);
         }
      },
+     deleteAll : async (req, res) => {
+        try {
+            const token = req.cookies.access_token;
+            decodedToken = jwt_decode(token);
+            playlist.find({idUser:decodedToken.sub}).deleteMany(function(err) {
+                if (err)
+                    {console.log("Error while deleting " + err.message);}
+                else {
+                    res.status(200).json("Playlists has been deleted");
+                }
+            })
+            
+            
+        } catch (err) {
+            return res.status(500).json(err);
+        }
+     },
+
+     fetechPlaylistByName: async (req, res) => { 
+        await playlist.find({name: req.params.playlistName })
+            .then(data => {
+                res.send({ playlist: data });
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while retrieving playlist."
+                });
+            });
+     },
+     updateMyPlaylist: async (req, res) => {}
 
 }; module.exports = musicAdminCtrl;

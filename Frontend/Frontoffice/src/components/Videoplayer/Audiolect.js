@@ -3,6 +3,7 @@ import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 
 import { useDropzone } from 'react-dropzone';
 
+import Navbar2 from "../Navbar/Navbar";
 
 
 
@@ -127,6 +128,10 @@ const [file2,setFile2]=useState([]);
         props.songName(file3.path);
     };
     return (
+<div>
+<Navbar2/>
+
+
         <div style={{marginLeft:'78%'}}>
 
 
@@ -148,6 +153,7 @@ const [file2,setFile2]=useState([]);
 
             </div>
 
+        </div>
         </div>
     );
 }

@@ -8,6 +8,7 @@ router.post('/addlyrics/:id',Log,lyricsCtrl.addlyrics); // id : MusicId
 router.delete('/deletelyrics/:idlyrics/:idMusic',Log,lyricsCtrl.deletelyrics);
 router.put('/likelyrics/:lyricsId',Log,lyricsCtrl.likelyrics);
 router.put('/dislikelyrics/:lyricsId',Log,lyricsCtrl.dislikelyrics);
+
 router.put('/updateLyrics/:lyricsId',Log,lyricsCtrl.updateLyrics); //manqué
 
 module.exports = router;

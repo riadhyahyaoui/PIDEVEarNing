@@ -19,10 +19,10 @@ var server = require('http').Server(app);
 const io = require("socket.io")(server, {
     cors: {
         origin: "*",
-        methods: [ "GET", "POST" ]
+        methods: ["GET", "POST"]
     }
 })
-let x=true;
+let x = true;
 io.on("connection", (socket) => {
     socket.emit("me", socket.id)
     /*io.of("/").adapter.on("create-room", (room) => {
@@ -30,12 +30,12 @@ io.on("connection", (socket) => {
     });*/
     socket.on("disconnect", () => {
         socket.broadcast.emit("callEnded");
-        x=false;
+        x = false;
     })
 
     socket.on("callUser", (data) => {
 
-        io.to(data.userToCall).emit("callUser", {signal: data.signalData, from: data.from, name: data.name})
+        io.to(data.userToCall).emit("callUser", { signal: data.signalData, from: data.from, name: data.name })
 
     })
 
@@ -98,17 +98,17 @@ var configDB = require('./database/mongodb.json');
 //mongo config
 const connect = mongoose.connect(
 
-   // process.env.MONGO_URL,
-   configDB.mongo.uri,
+    //process.env.MONGO_URL,
+    configDB.mongo.uri,
 
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    findOneAndUpdate: true
-  },
-  () => console.log('Connected to DB !!'));
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
+        findOneAndUpdate: true
+    },
+    () => console.log('Connected to DB !!'));
 
 //!listening on port
 

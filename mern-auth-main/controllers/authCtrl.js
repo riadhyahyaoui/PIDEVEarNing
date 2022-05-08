@@ -8,6 +8,7 @@ const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport')
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client("132856096478-jo705a4g0tu8ungd07r1fhocu1d9ccp3.apps.googleusercontent.com");
+const multer = require("multer");
 
 const jwt_decode = require('jwt-decode');
 const transporter = nodemailer.createTransport(sendgridTransport({
@@ -16,6 +17,43 @@ const transporter = nodemailer.createTransport(sendgridTransport({
 
   }
 }))
+// const MIME_TYPE = {
+//   "image/png": "png",
+//   "image/jpeg": "jpg",
+//   "image/jpg": "jpg",
+// };
+// const storage = multer.diskStorage({
+//   // destination
+//   destination: (req, file, cb) => {
+//     const isValid = MIME_TYPE[file.mimetype];
+//     let error = new Error("Mime type is invalid");
+//     if (isValid) {
+//       error = null;
+//     }
+//     //Affecter la destination
+//     cb(null, "public/uploads/images");
+//   },
+//  //file name
+//   filename: (req, file, cb) => {
+//     const name = file.originalname.toLowerCase().split(" ").join("-");
+//     const extension = MIME_TYPE[file.mimetype];
+//     const imgName = name + "-" + Date.now() + "--" + "." + extension;
+//     //Affecter file name
+//     cb(null, imgName);
+//   },
+// });
+const storage = multer.diskStorage({
+  destination: function(req,file,cb){
+      cb(null,'./public/uploads/images');
+  },
+  
+  filename : function(req,file,cb){
+      imageName=req.body.date_debut+"-"+file.originalname;
+      cb(null,  imageName);
+  }
+})
+
+const upload = multer({storage: storage});
 const transporter2 = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -29,6 +67,7 @@ const authCtrl = {
     try {
       const { fullname, username, email, password, mobile, address, gender } = req.body;
       let newUserName = username.toLowerCase().replace(/ /g, "");
+      // let url = req.protocol + "://" + req.get("host");
 
       const user_name = await Users.findOne({ username: newUserName });
       if (user_name) {
@@ -62,7 +101,10 @@ const authCtrl = {
         mobile,
         address,
         Isactive: false,
-        secretToken: st
+        secretToken: st,
+        image:req.body.imageName,
+
+       // image:url  + '/public/uploads/images/' + req.file.filename
       });
       await newUser.save();
       const emailData = {
@@ -71,7 +113,7 @@ const authCtrl = {
         subject: 'New account created',
         html: `
                     <h1>Please use the following to activate your account</h1>
-                    <p>http://localhost:8080/api/auth/activate/${st}</p>
+                    <p>http://localhost:3000/activate/${st}</p>
                     <hr />
                     <p>This email may containe sensetive information</p>
                     
@@ -140,6 +182,7 @@ const authCtrl = {
         access_token,
         user: {
           ...user._doc,
+          token:access_token,
           password: "",
         },
       });
@@ -207,14 +250,16 @@ const authCtrl = {
       res.status(500).json(err);
     }
   },
-  forget: async (req, res, next) => {
+  forget: async (req, res) => {
     try {
-      const email = req.body.email;
-      const foundUser = await Users.findOne({ email });
+      const { email } = req.body;
+      console.log(email)
+      const foundUser = await Users.findOne({email});
+      console.log(foundUser)
       if (!foundUser) {
         return res
           .status(400)
-          .json({ msg: "This email is already registered." });
+          .json({ msg: "This email is not registered." });
       }
 
       st = randomstring.generate();
@@ -233,7 +278,7 @@ const authCtrl = {
         subject: 'Account password change ',
         html: `
                         <h1>Please use the following to change your password</h1>
-                        <p>http://localhost:8080/api/auth/reset/${st}</p>
+                        <p>http://localhost:3000/reset-password/${st}</p>
                         <hr />
                           <p>This email may containe sensetive information</p>
                     
@@ -263,6 +308,8 @@ const authCtrl = {
 
       const Passwordtoken = req.params.Passwordtoken;
       const foundUser = await Users.findOne({ Passwordtoken, "PasswordResetDate": { $gt: Date.now() } });
+
+
       if (!foundUser) {
         return res.status(403).json({ error: 'Password reset token is invalid or has expired' });
 

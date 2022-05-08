@@ -59,23 +59,38 @@ const Navbar = () => {
     console.log( "navbar current user :",currentuser);
     const isAdmin=currentuser?.isAdmin;
     return (
-        <Container>
-            <Wrapper>
-                <Left>
-                    <Logo>Ear_ning</Logo>
-                    <Menu>
-                        <Link to="/"> <MenuItem>Home</MenuItem></Link>
-                     <Link to="/karaoke"> <MenuItem>Karaoké</MenuItem> </Link>
-                        <Link to="/emotion"><MenuItem>Music Mood</MenuItem></Link>
-                        <Link to="/marketplace"><MenuItem>MarketPlace</MenuItem></Link>
-                        <Link to="/evenement"><MenuItem>Evenement</MenuItem></Link>
-                        <Link to="/course"><MenuItem>Course</MenuItem></Link>
-                        { isAdmin  && <Link to="/back"><MenuItem>Dashboard</MenuItem></Link>}
-                    </Menu>
-                </Left>
-              <Link to="/login"><Button>Sign In</Button></Link>
-            </Wrapper>
-        </Container>
+
+      // {currentuser &&
+      // <Link to="/Profil"><MenuItem>Profil</MenuItem></Link>
+
+                 <header >
+                  
+                    <Link to="/">
+                    <button className="primary-button2" id="reg_btn"><span>Home </span></button>
+                    </Link>
+                    <Link to="/karaoke">
+                        <button className="primary-button2" id="reg_btn"><span>karaoke </span></button>
+                    </Link>
+                    <Link to="/emotion">
+                        <button className="primary-button2" id="reg_btn"><span>Music Mood </span></button>
+                    </Link>
+                    <Link to="/marketplace">
+                        <button className="primary-button2" id="reg_btn"><span>MarketPlace </span></button>
+                    </Link>
+                    <Link to="/evenement">
+                        <button className="primary-button2" id="reg_btn"><span>evenement </span></button>
+                    </Link>
+                    <Link to="/course">
+                        <button className="primary-button2" id="reg_btn"><span>Course </span></button>
+                    </Link>
+                    {currentuser &&
+        
+                    <Link to="/Profil">
+                        <button className="primary-button2" id="reg_btn"><span>Profil </span></button>
+                    </Link>
+                  }
+          </header>
+                            
     );
 };
 
