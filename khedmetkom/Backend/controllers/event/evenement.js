@@ -1,11 +1,10 @@
 const evenementModel = require("../../models/evenement");
-const User = require("../../models/User");
 
 const { search } = require("../../routes/event/evenement");
 const ObjectId = require("mongoose").Types.ObjectId;
 
 
-const userModel = require("../../models/User");
+const userModel = require("../../models/userModel");
 
 module.exports.signUp = async (req, res) => {
   const {

@@ -1,5 +1,5 @@
 const Karaoke = require("../../models/Karaoke");
-const User = require("../../models/User");
+const User = require("../../models/userModel");
 const router = require("express").Router();
 const multer = require('multer');
 const express = require("express");

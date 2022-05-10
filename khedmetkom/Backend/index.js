@@ -14,6 +14,24 @@ const courseRoute = require("./routes/Course/course");
 //const http = require("http")
 const cors = require("cors");
 var server = require('http').Server(app);
+const path = require('path');
+
+app.use('/public/uploads/images', express.static(path.join('public/uploads/images')))
+
+//!Routers
+app.use('/api/auth', require('./routes/authRouter'));
+app.use('/api/user', require('./routes/userRouter'));
+app.use('/api/admin', require('./routes/authAdminRouter'));
+
+app.use('/api/music', require('./routes/music/musicRouter'));
+
+app.use('/api/comment', require('./routes/comment/commentRouter'));
+app.use('/api/lyrics', require('./routes/lyrics/lyricsRouter'));
+app.use('/api/event', require('./routes/event/evenement'));
+app.use('/api/playlist', require('./routes/playlist/playlistRouter'));
+
+app.use('/api/reclamation', require('./routes/reclamation/reclamationRouter'));
+app.use('/api/reclamationAdmin', require('./routes/reclamation/reclamationAdminRouter'));
 
 dotenv.config();
 
