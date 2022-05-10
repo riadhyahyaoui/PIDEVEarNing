@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d41b6f7d-35ab-405f-ad95-ec06b0129772" name="Changes" comment="karaoke final Modification">
+      <change afterPath="$PROJECT_DIR$/../../Backend/controllers/event/evenement.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/Frontend.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backoffice/src/pages/AddEvent/NewEvent.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backoffice/src/pages/AddEvent/styles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backoffice/src/pages/Calendar/Calendar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backoffice/src/pages/Calendar/Calendar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backoffice/src/pages/Stats/Stats.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backoffice/src/pages/Stats/Stats.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/models/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/models/evenement.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/models/evenement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/routes/event/evenement.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/routes/event/evenement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backoffice/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backoffice/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backoffice/src/components/sidebar/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backoffice/src/components/sidebar/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backoffice/src/pages/Course/Course.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backoffice/src/pages/Course/Course.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backoffice/src/pages/CourseList/CourseList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backoffice/src/pages/CourseList/CourseList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backoffice/src/pages/NewCourse/NewCourse.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backoffice/src/pages/NewCourse/NewCourse.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Course/Course.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Course/Course.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Course/DetailCourse.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Course/DetailCourse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Course/Lesson.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Course/Lesson.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Evenement/Evenement.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Evenement/components/AddEvents.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backoffice/src/pages/AddEvent/NewEvent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Evenement/components/Categories.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Evenement/components/CategoryItem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Evenement/components/Evenement.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Evenement/components/Evenement.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Evenement/components/Evenementdetails.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Evenement/components/Evenements.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Evenement/components/Navbar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Evenement/components/Newsletter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Evenement/components/Slider.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Evenement/data.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Evenement/pages/Cart.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Evenement/pages/Home.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Evenement/responsive.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Videoplayer/FullVideo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Videoplayer/FullVideo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Videoplayer/ScreenRecordPreviewModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Videoplayer/ScreenRecordPreviewModal.jsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="28qcA04DVMEDGvdpr8Jx1WC2TJr" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\teymo\Desktop\eaarning Last Last\PIDEVEarNing\Frontend\Frontoffice\src\components" />
+      <recent name="C:\Users\teymo\Desktop\eaarning Last Last\PIDEVEarNing\Frontend\Frontoffice\src\Backoffice\src\pages" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d41b6f7d-35ab-405f-ad95-ec06b0129772" name="Changes" comment="" />
+      <created>1651947409655</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1651947409655</updated>
+      <workItem from="1651947411338" duration="1481000" />
+      <workItem from="1651957459568" duration="15448000" />
+      <workItem from="1652084931438" duration="20760000" />
+      <workItem from="1652116826402" duration="956000" />
+      <workItem from="1652120419985" duration="10174000" />
+    </task>
+    <task id="LOCAL-00001" summary="Course Cart Finished">
+      <created>1651970078824</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1651970078824</updated>
+    </task>
+    <task id="LOCAL-00002" summary="karaoke final Modification">
+      <created>1652120640950</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1652120640951</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Course Cart Finished" />
+    <MESSAGE value="karaoke final Modification" />
+    <option name="LAST_COMMIT_MESSAGE" value="karaoke final Modification" />
+  </component>
+</project>

@@ -1,0 +1,19 @@
+Index: src/components/Results/Results.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react';\r\n\r\nimport { FontAwesomeIcon } from '@fortawesome/react-fontawesome';\r\nimport Spinner from '../Spinner/Spinner';\r\n\r\nimport { mapExpressionToEmoji } from '../../helpers/emojis';\r\n\r\nimport './Results.css';\r\n\r\nconst Results = ({ results, processing }) => {\r\n  /*\r\n   <p>You seem to be {Math.round(results[0].age)} years old</p>\r\n              <p>I think you are a {results[0].gender}</p>\r\n  */\r\n\r\n\r\n  if (processing && results) {\r\n    return <Spinner />;\r\n  }\r\n  if (!processing && results && results.length > 0) {\r\n    const url=`https://www.youtube.com/results?search_query=${results[0].expressions.asSortedArray()[0].expression}+music`\r\n   // window.open(url, '_blank');\r\n    //openInNewTab();\r\n    return (\r\n      <div className=\"results\">\r\n        {results.length > 1 ? (\r\n          <div>\r\n            <p>I think...</p>\r\n            <button onClick={(e)=>{window.open(url, '_blank')}}>open</button>\r\n            {results.map((result, i) => (\r\n              <div className=\"results__wrapper\" key={i}>\r\n                <div style={{ width: '300px' }}>\r\n                  <p>\r\n                    One of you is probably {result.gender}, is looking {result.expressions.asSortedArray()[0].expression} and looks around{' '}\r\n                    {Math.round(result.age)}\r\n                  </p>\r\n                </div>\r\n                <FontAwesomeIcon icon={mapExpressionToEmoji(result.expressions.asSortedArray()[0].expression)} size=\"4x\" />\r\n                <FontAwesomeIcon icon={mapExpressionToEmoji(result.gender)} size=\"4x\" />\r\n                <button onClick={(e)=>{window.open(url, '_blank')}}>open</button>\r\n              </div>\r\n            ))}\r\n          </div>\r\n        ) : (\r\n          <div className=\"results__wrapper\">\r\n            <div>\r\n              <p>I think...</p>\r\n              <p>You look {results[0].expressions.asSortedArray()[0].expression}</p>\r\n\r\n            </div>\r\n            <div className=\"results__emoji\">\r\n              <FontAwesomeIcon icon={mapExpressionToEmoji(results[0].expressions.asSortedArray()[0].expression)} size=\"4x\" />\r\n              <FontAwesomeIcon icon={mapExpressionToEmoji(results[0].gender)} size=\"4x\" />\r\n\r\n            </div>\r\n          </div>\r\n        )}\r\n      </div>\r\n    );\r\n  } else {\r\n    return (\r\n      <div className=\"results\">\r\n        <Spinner />\r\n      </div>\r\n    );\r\n  }\r\n};\r\n\r\nexport default Results;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/Results/Results.js b/src/components/Results/Results.js
+--- a/src/components/Results/Results.js	(revision 6ac073efc3154958cf28a9f9c7743b9039b2c11a)
++++ b/src/components/Results/Results.js	(date 1652013007748)
+@@ -53,6 +53,8 @@
+               <FontAwesomeIcon icon={mapExpressionToEmoji(results[0].gender)} size="4x" />
+ 
+             </div>
++            <button onClick={()=>{window.open(url, '_blank');}}>Go Youtube</button>
++
+           </div>
+         )}
+       </div>
