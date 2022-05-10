@@ -26,6 +26,7 @@ function App() {
 
 
           <Route path="/users" element={<UserList />}/>
+          {/* <Route path="/reclamation" element={<Reclamation />}/> */}
 
 
           <Route path="/user/:userId" element={<User />}/>
